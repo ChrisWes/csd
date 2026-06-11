@@ -23,10 +23,10 @@ export default function App() {
         <PersonaFilter activePersona={activePersona} onSelect={setActivePersona} />
         {activePersona !== 'all' && <PersonaBanner personaId={activePersona} />}
         <HeadlineStats activePersona={activePersona} />
-        <ChartSection />
-        <PerceptionGap />
-        <OffshoreOutcomes />
-        <PartnerMaturity />
+        <ChartSection activePersona={activePersona} />
+        <PerceptionGap activePersona={activePersona} />
+        <OffshoreOutcomes activePersona={activePersona} />
+        <PartnerMaturity activePersona={activePersona} />
         <ThemeGrid />
         <QuoteBlock />
         <Footer />

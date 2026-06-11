@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { offshoreStats, offshoreOutcomes, quotes } from '../data/surveyData.js';
 import { useCountUp } from '../hooks/useCountUp.js';
+import ChartExplainer from './ChartExplainer.jsx';
 
 function BigCounter({ value, label }) {
   const { ref, inView } = useInView({ threshold: 0.5, triggerOnce: true });
@@ -46,7 +47,7 @@ function OutcomeBar({ label, value, max, color, highlight, delay, animate }) {
   );
 }
 
-export default function OffshoreOutcomes() {
+export default function OffshoreOutcomes({ activePersona = 'all' }) {
   const { ref, inView } = useInView({ threshold: 0.15, triggerOnce: true });
   const filtered = offshoreOutcomes.data.filter((d) => d.label !== 'Nothing has improved');
   const max = Math.max(...filtered.map((d) => d.value));
@@ -64,74 +65,82 @@ export default function OffshoreOutcomes() {
           initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="mb-14"
+          className="mb-10"
         >
           <p className="text-[12px] font-medium text-slate uppercase tracking-wide8 mb-3">
             Theme 10 · The offshore reality check
           </p>
         </motion.div>
 
-        {/* Two large stats */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-10 sm:gap-20 mb-16">
-          <BigCounter value={offshoreStats.useOffshore} label="use offshore partners" />
-          <div className="w-px h-20 bg-mist hidden sm:block" aria-hidden="true" />
-          <BigCounter value={offshoreStats.reportBetterOutcomes} label="of those report better outcomes" />
-        </div>
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-12 items-start">
+          <div>
+            {/* Two large stats */}
+            <div className="flex flex-col sm:flex-row items-start gap-10 sm:gap-16 mb-14">
+              <BigCounter value={offshoreStats.useOffshore} label="use offshore partners" />
+              <div className="w-px h-20 bg-mist hidden sm:block" aria-hidden="true" />
+              <BigCounter value={offshoreStats.reportBetterOutcomes} label="of those report better outcomes" />
+            </div>
 
-        {/* Outcomes chart */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          className="mb-12"
-        >
-          <h3 className="text-[20px] font-semibold text-ink mb-1">
-            What's actually improving
-          </h3>
-          <p className="text-[13px] text-slate mb-6">{offshoreOutcomes.note}</p>
-          <div className="space-y-3" aria-label="Offshore outcomes breakdown">
-            {filtered.map((item, i) => (
-              <OutcomeBar
-                key={item.label}
-                label={item.label}
-                value={item.value}
-                max={max}
-                color="#0E9E8E"
-                highlight={i === 0}
-                delay={i * 0.06}
-                animate={inView}
-              />
-            ))}
+            {/* Outcomes chart */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="mb-10"
+            >
+              <h3 className="text-[20px] font-semibold text-ink mb-1">
+                What's actually improving
+              </h3>
+              <p className="text-[13px] text-slate mb-6">{offshoreOutcomes.note}</p>
+              <div className="space-y-3" aria-label="Offshore outcomes breakdown">
+                {filtered.map((item, i) => (
+                  <OutcomeBar
+                    key={item.label}
+                    label={item.label}
+                    value={item.value}
+                    max={max}
+                    color="#0E9E8E"
+                    highlight={i === 0}
+                    delay={i * 0.06}
+                    animate={inView}
+                  />
+                ))}
+              </div>
+            </motion.div>
+
+            {/* Pull quote */}
+            {q7 && (
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                animate={inView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.5, delay: 0.5 }}
+                className="border-l-2 border-mist pl-6 my-8"
+              >
+                <p className="text-[22px] text-nt-red font-bold mb-2 leading-none" aria-hidden="true">"</p>
+                <p className="text-[17px] italic text-ink leading-[1.7] mb-3">
+                  {q7.text}
+                </p>
+                <p className="text-[13px] text-slate uppercase tracking-wide8">
+                  {q7.role} · {q7.location}
+                </p>
+              </motion.div>
+            )}
+
+            {/* Closing line */}
+            <motion.p
+              className="text-[17px] text-slate italic mt-4"
+              initial={{ opacity: 0 }}
+              animate={inView ? { opacity: 1 } : {}}
+              transition={{ duration: 0.5, delay: 0.7 }}
+            >
+              The risk is not offshore itself. The risk is the wrong operating model around it.
+            </motion.p>
+          </div>{/* chart content end */}
+
+          <div className="lg:border-l lg:border-mist lg:pl-10 pt-1">
+            <ChartExplainer section="offshore" activePersona={activePersona} />
           </div>
-        </motion.div>
-
-        {/* Pull quote */}
-        {q7 && (
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5, delay: 0.5 }}
-            className="max-w-2xl mx-auto text-center my-12"
-          >
-            <p className="text-[22px] text-nt-red font-bold mb-2" aria-hidden="true">"</p>
-            <p className="text-[18px] italic text-ink leading-[1.7] mb-4">
-              {q7.text}
-            </p>
-            <p className="text-[13px] text-slate uppercase tracking-wide8">
-              {q7.role} · {q7.location}
-            </p>
-          </motion.div>
-        )}
-
-        {/* Closing line */}
-        <motion.p
-          className="text-[18px] text-slate text-center mt-6 italic"
-          initial={{ opacity: 0 }}
-          animate={inView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.5, delay: 0.7 }}
-        >
-          The risk is not offshore itself. The risk is the wrong operating model around it.
-        </motion.p>
+        </div>{/* grid end */}
       </div>
     </section>
   );

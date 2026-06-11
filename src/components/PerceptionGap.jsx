@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { perceptionGap, quotes } from '../data/surveyData.js';
 import { useCountUp } from '../hooks/useCountUp.js';
+import ChartExplainer from './ChartExplainer.jsx';
 
 function GapCounter({ value, color, label }) {
   const { ref, inView } = useInView({ threshold: 0.5, triggerOnce: true });
@@ -25,7 +26,7 @@ function GapCounter({ value, color, label }) {
   );
 }
 
-export default function PerceptionGap() {
+export default function PerceptionGap({ activePersona = 'all' }) {
   const { ref: sectionRef, inView: sectionIn } = useInView({ threshold: 0.15, triggerOnce: true });
   const misalignmentQuote = quotes.find((q) => q.id === 'q4');
 
@@ -41,7 +42,7 @@ export default function PerceptionGap() {
           initial={{ opacity: 0, y: 24 }}
           animate={sectionIn ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="mb-16"
+          className="mb-12"
         >
           <p className="text-[12px] font-medium text-slate uppercase tracking-wide8 mb-3">
             The perception gap · Theme 5
@@ -52,6 +53,9 @@ export default function PerceptionGap() {
             <span className="text-nt-red">39% of the people delivering them agree.</span>
           </h2>
         </motion.div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-12 items-start">
+        <div>{/* chart content start */}
 
         {/* Two numbers */}
         <motion.div
@@ -169,6 +173,12 @@ export default function PerceptionGap() {
         >
           The gap rarely stems from lack of ambition. It stems from measuring success differently at each level.
         </motion.p>
+        </div>{/* chart content end */}
+
+          <div className="lg:border-l lg:border-mist lg:pl-10 pt-1">
+            <ChartExplainer section="perceptionGap" activePersona={activePersona} />
+          </div>
+        </div>{/* grid end */}
       </div>
     </section>
   );

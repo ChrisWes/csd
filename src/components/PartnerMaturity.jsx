@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { partnerClassification, partnerByOrgSize, partnerAspiration } from '../data/surveyData.js';
+import ChartExplainer from './ChartExplainer.jsx';
 
 const BAR_COLORS = {
   'Strategic partner': '#C8102E',
@@ -37,7 +38,7 @@ function PartnerBar({ item, max, delay, animate }) {
   );
 }
 
-export default function PartnerMaturity() {
+export default function PartnerMaturity({ activePersona = 'all' }) {
   const { ref, inView } = useInView({ threshold: 0.15, triggerOnce: true });
   const max = Math.max(...partnerClassification.data.map((d) => d.value));
 
@@ -63,60 +64,68 @@ export default function PartnerMaturity() {
           </h2>
         </motion.div>
 
-        {/* Classification bars */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="mt-10 space-y-4 max-w-2xl"
-          aria-label="Partner relationship classification"
-        >
-          <p className="text-[13px] text-slate mb-6">{partnerClassification.question}</p>
-          {partnerClassification.data.map((item, i) => (
-            <div key={item.label}>
-              <PartnerBar item={item} max={max} delay={i * 0.08} animate={inView} />
-              <p className="text-[12px] text-slate/70 mt-1 pl-[198px] leading-snug">
-                {item.description}
-              </p>
-            </div>
-          ))}
-        </motion.div>
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-12 items-start mt-10">
+          <div>
+            {/* Classification bars */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="space-y-4 max-w-2xl"
+              aria-label="Partner relationship classification"
+            >
+              <p className="text-[13px] text-slate mb-6">{partnerClassification.question}</p>
+              {partnerClassification.data.map((item, i) => (
+                <div key={item.label}>
+                  <PartnerBar item={item} max={max} delay={i * 0.08} animate={inView} />
+                  <p className="text-[12px] text-slate/70 mt-1 pl-[198px] leading-snug">
+                    {item.description}
+                  </p>
+                </div>
+              ))}
+            </motion.div>
 
-        {/* Org size comparison */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, delay: 0.5 }}
-          className="mt-14 grid grid-cols-1 sm:grid-cols-2 gap-0 max-w-lg"
-        >
-          <div className="border border-mist rounded-l p-6">
-            <div className="text-[40px] font-extrabold text-slate leading-none mb-2">
-              {partnerByOrgSize[0].strategicPct}%
-            </div>
-            <p className="text-[13px] text-slate leading-snug">
-              of <strong className="font-semibold text-ink">smaller enterprises</strong> see their partner as strategic
-            </p>
-          </div>
-          <div className="border border-mist border-l-0 rounded-r p-6 bg-near-white">
-            <div className="text-[40px] font-extrabold text-nt-red leading-none mb-2">
-              {partnerByOrgSize[1].strategicPct}%
-            </div>
-            <p className="text-[13px] text-slate leading-snug">
-              of <strong className="font-semibold text-ink">larger enterprises</strong> see their partner as strategic
-            </p>
-          </div>
-        </motion.div>
+            {/* Org size comparison */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, delay: 0.5 }}
+              className="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-0 max-w-lg"
+            >
+              <div className="border border-mist rounded-l p-6">
+                <div className="text-[40px] font-extrabold text-slate leading-none mb-2">
+                  {partnerByOrgSize[0].strategicPct}%
+                </div>
+                <p className="text-[13px] text-slate leading-snug">
+                  of <strong className="font-semibold text-ink">smaller enterprises</strong> see their partner as strategic
+                </p>
+              </div>
+              <div className="border border-mist border-l-0 rounded-r p-6 bg-near-white">
+                <div className="text-[40px] font-extrabold text-nt-red leading-none mb-2">
+                  {partnerByOrgSize[1].strategicPct}%
+                </div>
+                <p className="text-[13px] text-slate leading-snug">
+                  of <strong className="font-semibold text-ink">larger enterprises</strong> see their partner as strategic
+                </p>
+              </div>
+            </motion.div>
 
-        {/* Closing insight */}
-        <motion.p
-          className="text-[18px] italic text-ink mt-12 max-w-2xl"
-          initial={{ opacity: 0 }}
-          animate={inView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.5, delay: 0.7 }}
-          style={{ lineHeight: 1.6 }}
-        >
-          The jump from trusted to strategic is not a procurement decision. It is a relationship architecture.
-        </motion.p>
+            {/* Closing insight */}
+            <motion.p
+              className="text-[18px] italic text-ink mt-10 max-w-2xl"
+              initial={{ opacity: 0 }}
+              animate={inView ? { opacity: 1 } : {}}
+              transition={{ duration: 0.5, delay: 0.7 }}
+              style={{ lineHeight: 1.6 }}
+            >
+              The jump from trusted to strategic is not a procurement decision. It is a relationship architecture.
+            </motion.p>
+          </div>{/* chart content end */}
+
+          <div className="lg:border-l lg:border-mist lg:pl-10 pt-1">
+            <ChartExplainer section="partnerMaturity" activePersona={activePersona} />
+          </div>
+        </div>{/* grid end */}
       </div>
     </section>
   );

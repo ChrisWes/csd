@@ -1,10 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import {
-  BarChart, Bar, XAxis, YAxis, Cell, Tooltip, ResponsiveContainer,
-  PieChart, Pie, Legend
-} from 'recharts';
+import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
 import {
   buildDrivers,
   integrationByIndustry,
@@ -12,23 +9,13 @@ import {
   aiBlockers,
   aiStackInvestment,
 } from '../data/surveyData.js';
-
-// ── Custom tooltip ──────────────────────────────────────────────
-function ChartTooltip({ active, payload, label }) {
-  if (!active || !payload?.length) return null;
-  return (
-    <div className="bg-white border border-mist px-3 py-2 text-[12px] text-ink rounded">
-      <p className="font-medium mb-0.5">{label || payload[0]?.name}</p>
-      <p className="text-slate">{payload[0]?.value}%</p>
-    </div>
-  );
-}
+import ChartExplainer from './ChartExplainer.jsx';
 
 // ── Animated horizontal bar ─────────────────────────────────────
 function HBar({ label, value, max, color, delay, animate }) {
   return (
-    <div className="flex items-center gap-3 group">
-      <span className="text-[13px] text-slate w-64 shrink-0 text-right leading-snug pr-2">
+    <div className="flex items-center gap-3">
+      <span className="text-[13px] text-slate w-56 shrink-0 text-right leading-snug pr-2">
         {label}
       </span>
       <div className="flex-1 bg-mist rounded-full h-2 overflow-hidden">
@@ -63,6 +50,7 @@ function BuildDriversChart() {
           animate={inView}
         />
       ))}
+      <p className="text-[12px] text-slate pt-1">{buildDrivers.note}</p>
     </div>
   );
 }
@@ -80,12 +68,12 @@ function IntegrationIndustry() {
       {integrationByIndustry.data.map((item, i) => (
         <motion.div
           key={item.label}
-          className="px-6 py-5"
+          className="px-5 py-4"
           initial={{ opacity: 0, y: 16 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.4, delay: i * 0.08 }}
         >
-          <div className="text-[32px] font-extrabold text-nt-purple leading-none mb-1">
+          <div className="text-[28px] font-extrabold text-nt-purple leading-none mb-1">
             {item.value}%
           </div>
           <div className="text-[12px] text-slate uppercase tracking-wide8 leading-snug">
@@ -118,15 +106,15 @@ function AiDonutComparison() {
           { data: govData, label: 'Building governance', value: aiAdoption.aiGovernance, color: '#5B2D8E' },
         ].map((ring) => (
           <div key={ring.label} className="flex flex-col items-center gap-2">
-            <div className="relative w-36 h-36">
+            <div className="relative w-32 h-32">
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
                   <Pie
                     data={ring.data}
                     cx="50%"
                     cy="50%"
-                    innerRadius={48}
-                    outerRadius={64}
+                    innerRadius={44}
+                    outerRadius={58}
                     startAngle={90}
                     endAngle={-270}
                     dataKey="value"
@@ -139,7 +127,7 @@ function AiDonutComparison() {
                 </PieChart>
               </ResponsiveContainer>
               <div className="absolute inset-0 flex items-center justify-center">
-                <span className="text-[26px] font-extrabold" style={{ color: ring.color }}>
+                <span className="text-[22px] font-extrabold" style={{ color: ring.color }}>
                   {ring.value}%
                 </span>
               </div>
@@ -182,11 +170,7 @@ function AiStackChart() {
   const { ref, inView } = useInView({ threshold: 0.2, triggerOnce: true });
 
   return (
-    <div
-      ref={ref}
-      className="space-y-2.5"
-      aria-label="AI stack investment priorities"
-    >
+    <div ref={ref} className="space-y-2.5" aria-label="AI stack investment priorities">
       {aiStackInvestment.data.map((item, i) => (
         <motion.div
           key={item.label}
@@ -206,7 +190,7 @@ function AiStackChart() {
           <span className="text-[13px] font-semibold text-ink w-8 shrink-0 text-right">
             {item.value}%
           </span>
-          <span className="text-[13px] text-slate w-56 shrink-0 leading-snug">
+          <span className="text-[13px] text-slate w-64 shrink-0 leading-snug">
             {item.label}
           </span>
         </motion.div>
@@ -215,76 +199,80 @@ function AiStackChart() {
   );
 }
 
+// ── Section label ───────────────────────────────────────────────
+function SectionLabel({ theme, title }) {
+  return (
+    <div className="mb-8">
+      <p className="text-[12px] font-medium text-slate uppercase tracking-wide8 mb-2">{theme}</p>
+      <h2 className="text-[32px] font-semibold text-ink" style={{ letterSpacing: '-0.01em' }}>
+        {title}
+      </h2>
+    </div>
+  );
+}
+
 // ── Main export ─────────────────────────────────────────────────
-export default function ChartSection() {
+export default function ChartSection({ activePersona = 'all' }) {
   return (
     <>
-      {/* Build drivers */}
+      {/* ── Build drivers ── */}
       <section className="bg-white py-20" aria-label="Why organisations build custom software">
         <div className="max-w-7xl mx-auto px-6">
-          <p className="text-[12px] font-medium text-slate uppercase tracking-wide8 mb-3">
-            Theme 1
-          </p>
-          <h2 className="text-[32px] font-semibold text-ink tracking-tight1 mb-3">
-            Why organisations build their own
-          </h2>
-          <p className="text-[16px] text-slate leading-[1.7] mb-10 max-w-2xl">
-            Integration is simultaneously the top driver of custom software adoption and its greatest delivery
-            challenge — the same force fuelling demand and throttling execution.
-          </p>
+          <SectionLabel theme="Theme 1" title="Why organisations build their own" />
 
-          <BuildDriversChart />
-          <p className="text-[12px] text-slate mt-4">{buildDrivers.note}</p>
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-12 items-start">
+            <div>
+              <BuildDriversChart />
+              <div className="mt-10">
+                <h3 className="text-[17px] font-semibold text-ink mb-1">
+                  Integration as a build driver, by sector
+                </h3>
+                <p className="text-[13px] text-slate mb-3">{integrationByIndustry.question}</p>
+                <IntegrationIndustry />
+              </div>
+            </div>
 
-          <div className="mt-12">
-            <h3 className="text-[20px] font-semibold text-ink mb-1">
-              Integration as a build driver, by sector
-            </h3>
-            <p className="text-[13px] text-slate mb-4">
-              {integrationByIndustry.question}
-            </p>
-            <IntegrationIndustry />
+            <div className="lg:border-l lg:border-mist lg:pl-10 pt-1">
+              <ChartExplainer section="buildDrivers" activePersona={activePersona} />
+            </div>
           </div>
         </div>
       </section>
 
-      {/* AI section */}
+      {/* ── AI ── */}
       <section className="bg-near-white py-20" aria-label="AI ambition vs readiness">
         <div className="max-w-7xl mx-auto px-6">
-          <p className="text-[12px] font-medium text-slate uppercase tracking-wide8 mb-3">
-            Theme 4
-          </p>
-          <h2 className="text-[32px] font-semibold text-ink tracking-tight1 mb-10">
-            AI ambition vs operational readiness
-          </h2>
+          <SectionLabel theme="Theme 4" title="AI ambition vs operational readiness" />
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-            <div>
-              <h3 className="text-[20px] font-semibold text-ink mb-2">
-                Adopting AI: 85%. Building governance alongside it: 75%.
-              </h3>
-              <p className="text-[14px] text-slate mb-8 leading-relaxed">
-                One in four organisations is building AI capability without a governance framework.
-              </p>
-              <AiDonutComparison />
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-12 items-start">
+            <div className="space-y-12">
+              <div>
+                <h3 className="text-[18px] font-semibold text-ink mb-2">
+                  Adopting AI: 85%. Building governance alongside it: 75%.
+                </h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mt-6">
+                  <AiDonutComparison />
+                  <div>
+                    <h4 className="text-[15px] font-semibold text-ink mb-4">What's slowing it down</h4>
+                    <AiBlockersChart />
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <h3 className="text-[18px] font-semibold text-ink mb-1">
+                  Where are organisations investing in the AI stack?
+                </h3>
+                <p className="text-[13px] text-slate mb-5">
+                  Prioritised for investment or transformation, next 12–24 months
+                </p>
+                <AiStackChart />
+              </div>
             </div>
 
-            <div>
-              <h3 className="text-[20px] font-semibold text-ink mb-6">
-                What's slowing it down
-              </h3>
-              <AiBlockersChart />
+            <div className="lg:border-l lg:border-mist lg:pl-10 pt-1">
+              <ChartExplainer section="ai" activePersona={activePersona} />
             </div>
-          </div>
-
-          <div className="mt-16">
-            <h3 className="text-[20px] font-semibold text-ink mb-2">
-              Where are organisations investing in the AI stack?
-            </h3>
-            <p className="text-[13px] text-slate mb-6">
-              Prioritised for investment or transformation, next 12–24 months
-            </p>
-            <AiStackChart />
           </div>
         </div>
       </section>
