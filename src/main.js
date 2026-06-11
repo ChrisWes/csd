@@ -346,6 +346,187 @@ function updateStatOpacity() {
   });
 }
 
+// ── Benchmark ─────────────────────────────────────────────────
+const BENCHMARK = [
+  {
+    id: 'partner',
+    label: 'Partner relationship',
+    q: 'How would you classify your main software development partner?',
+    options: [
+      { label: 'Strategic partner — closely aligned, involved in high-value decisions',
+        stat: '32%', score: 2,
+        result: 'of organisations have made this work. You\'re in the top tier, ahead of 68% of your peers. The data suggests the gap to close is now about depth, not direction.' },
+      { label: 'Trusted delivery partner — reliable, but not shaping strategy',
+        stat: '47%', score: 1,
+        result: 'are here — the largest single group. Reliable execution, but the survey shows that strategic-level partners deliver measurably better long-term outcomes. The jump is a relationship investment, not a procurement one.' },
+      { label: 'Project-based provider — brought in for specific work',
+        stat: '14%', score: 0,
+        result: 'engage partners this way. Higher transaction cost, lower knowledge retention, and less ability to scale quickly. 97% of organisations say they would invest more in a partner delivering long-term value.' },
+      { label: 'Tactical / ad hoc — occasional gap-filling',
+        stat: '7%', score: 0,
+        result: 'use partners this way. The lowest-value model — and the hardest to build from. Nearly all organisations in this group report the same resourcing and capability constraints.' },
+    ],
+  },
+  {
+    id: 'ai',
+    label: 'AI governance',
+    q: 'Are you building AI governance alongside your AI programmes?',
+    options: [
+      { label: 'Yes — governance is being built in parallel',
+        stat: '75%', score: 2,
+        result: 'of AI-adopting organisations have done this. You\'re in the majority — but a slim one. The 25% who haven\'t will face the harder conversation when a compliance requirement or production incident forces it.' },
+      { label: 'We\'re adopting AI but governance is lagging behind',
+        stat: '25%', score: 1,
+        result: 'of AI adopters are in this gap — and it\'s the most common risk signal in the survey. The window to retrofit governance gets smaller the more AI systems accumulate dependencies and influence live processes.' },
+      { label: 'We haven\'t started AI adoption yet',
+        stat: '15%', score: 0,
+        result: 'of organisations haven\'t started yet. The competitive window is narrowing: 85% of your peers are already moving. The organisations that move now with governance built in will be substantially better positioned than late movers who bolt it on.' },
+    ],
+  },
+  {
+    id: 'perception',
+    label: 'Perception alignment',
+    q: 'Do your C-suite and delivery teams define project success the same way?',
+    options: [
+      { label: 'Yes — we have shared, explicit definitions throughout',
+        stat: '39%', score: 2,
+        result: 'of delivery managers say their projects genuinely exceeded expectations. If your delivery teams genuinely agree with your leadership\'s view, you\'re in a minority that the data suggests has invested seriously in alignment infrastructure.' },
+      { label: 'Partially — we know some gaps exist',
+        stat: '63%', score: 1,
+        result: 'of senior leaders believe their projects exceeded expectations. The gap between that figure and your delivery team\'s view — wherever it sits — is where ROI leaks undetected. Naming the gap is the necessary first step.' },
+      { label: 'No — there\'s a meaningful disconnect and we know it',
+        stat: '24pts', score: 0,
+        result: 'perception gap between C-suite and delivery managers across the survey. If you\'re aware of the disconnect, you\'re ahead of many organisations where it exists invisibly. The fix is measurement infrastructure, not attitude change.' },
+    ],
+  },
+  {
+    id: 'offshore',
+    label: 'Offshore model',
+    q: 'How do you use offshore development partners?',
+    options: [
+      { label: 'Embedded long-term squads, treated like internal teams',
+        stat: '99%', score: 2,
+        result: 'of organisations using offshore partners this way report measurably better outcomes. The embedded model is the differentiating variable — not the geography. You\'re operating the model that works.' },
+      { label: 'Primarily project-based or time-bound engagements',
+        stat: '51%', score: 1,
+        result: 'of offshore users cite increased innovation as a top outcome — but the majority of that value comes from embedded, not project-based, models. The step change is in the operating model, not the geography.' },
+      { label: 'We don\'t use offshore partners',
+        stat: '92%', score: 0,
+        result: 'of organisations use offshore partners — and 99% of them report better outcomes. The survey data makes a compelling case that the right offshore model is a capability multiplier, not just a cost lever.' },
+    ],
+  },
+];
+
+const benchmarkState = {};
+
+function renderBenchmark() {
+  const grid = $('#benchmark-grid');
+  if (!grid) return;
+
+  grid.innerHTML = BENCHMARK.map((q, qi) => `
+    <div id="bq-${q.id}" style="background:#fff;border:1px solid #E8E8E4;border-radius:6px;padding:1.75rem;">
+      <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.875rem;">
+        <span style="font-size:20px;font-weight:800;color:#C8102E;line-height:1;">${String(qi + 1).padStart(2,'0')}</span>
+        <span style="font-size:11px;font-weight:600;color:#4A4A48;text-transform:uppercase;letter-spacing:0.09em;">${q.label}</span>
+      </div>
+      <p style="font-size:15px;font-weight:500;color:#0F0F0F;line-height:1.5;margin:0 0 1rem;">${q.q}</p>
+      <div style="display:flex;flex-direction:column;gap:0.5rem;">
+        ${q.options.map((opt, oi) => `
+          <button data-q="${q.id}" data-oi="${oi}"
+            style="text-align:left;font-size:13px;color:#4A4A48;padding:0.5rem 0.875rem;border-radius:4px;border:1px solid #E8E8E4;background:#fff;cursor:pointer;line-height:1.4;transition:background 0.15s,color 0.15s,border-color 0.15s;">
+            ${opt.label}
+          </button>`).join('')}
+      </div>
+      <div id="br-${q.id}" style="display:none;margin-top:1.25rem;padding-top:1.25rem;border-top:1px solid #E8E8E4;opacity:0;transition:opacity 0.3s ease;">
+        <span id="br-stat-${q.id}" style="font-size:36px;font-weight:800;color:#C8102E;letter-spacing:-0.03em;line-height:1;display:block;margin-bottom:0.5rem;"></span>
+        <p id="br-text-${q.id}" style="font-size:13px;color:#4A4A48;line-height:1.65;margin:0;"></p>
+      </div>
+    </div>`).join('');
+}
+
+function selectOption(qId, oi) {
+  const q = BENCHMARK.find(b => b.id === qId);
+  if (!q) return;
+
+  benchmarkState[qId] = oi;
+
+  // Update button styles
+  $$(`button[data-q="${qId}"]`).forEach((btn, i) => {
+    const on = i === oi;
+    btn.style.background = on ? '#C8102E' : '#fff';
+    btn.style.color = on ? '#fff' : '#4A4A48';
+    btn.style.borderColor = on ? '#C8102E' : '#E8E8E4';
+    btn.style.fontWeight = on ? '500' : '400';
+  });
+
+  // Reveal result
+  const resultEl = $(`#br-${qId}`);
+  const statEl   = $(`#br-stat-${qId}`);
+  const textEl   = $(`#br-text-${qId}`);
+  if (resultEl && statEl && textEl) {
+    statEl.textContent = q.options[oi].stat;
+    textEl.textContent = q.options[oi].result;
+    resultEl.style.display = 'block';
+    requestAnimationFrame(() => { resultEl.style.opacity = '1'; });
+  }
+
+  if (Object.keys(benchmarkState).length === BENCHMARK.length) showBenchmarkSummary();
+}
+
+function showBenchmarkSummary() {
+  const el = $('#benchmark-summary');
+  if (!el || el.dataset.shown) return;
+  el.dataset.shown = '1';
+
+  const score = BENCHMARK.reduce((sum, q) => sum + (q.options[benchmarkState[q.id]]?.score ?? 0), 0);
+  const max   = BENCHMARK.reduce((sum, q) => sum + Math.max(...q.options.map(o => o.score)), 0);
+
+  let tier, headline, body;
+  if (score >= max * 0.75) {
+    tier = 'Leading';
+    headline = 'Your organisation is operating ahead of most peers across the dimensions the survey identifies as highest-value.';
+    body = 'The data suggests the priority is now acceleration and depth — going further in the areas you\'ve already invested in, rather than catching up. The organisations in this tier are the ones redefining what a strategic partner relationship looks like and what AI governance actually enables.';
+  } else if (score >= max * 0.4) {
+    tier = 'Developing';
+    headline = 'You have strong foundations in some areas and clear gaps in others.';
+    body = 'The survey data points to a consistent pattern: organisations in this tier tend to underinvest in governance (both AI and partner) relative to their delivery ambitions. Closing that gap typically has a faster ROI than most technology investments, because it stops value leaking from programmes already underway.';
+  } else {
+    tier = 'Establishing';
+    headline = 'There is a clear opportunity to close ground on your peers — and the ground is closeable.';
+    body = 'The organisations reporting the strongest outcomes across this survey have invested in three things above all others: strategic partner relationships, AI governance built in parallel with AI adoption, and embedded offshore models. None of these require new technology. They require operating model decisions.';
+  }
+
+  el.innerHTML = `
+    <div style="background:#0F0F0F;border-radius:6px;padding:2rem;margin-top:1.5rem;display:grid;grid-template-columns:auto 1fr;gap:2rem;align-items:start;">
+      <div style="text-align:center;">
+        <p style="font-size:11px;font-weight:600;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:0.1em;margin:0 0 0.375rem;">Your position</p>
+        <span style="font-size:28px;font-weight:800;color:#C8102E;line-height:1;">${tier}</span>
+      </div>
+      <div>
+        <p style="font-size:16px;font-weight:600;color:#fff;line-height:1.5;margin:0 0 0.75rem;">${headline}</p>
+        <p style="font-size:14px;color:rgba(255,255,255,0.7);line-height:1.7;margin:0 0 1.25rem;">${body}</p>
+        <a href="https://www.nashtechglobal.com/contact/" target="_blank" rel="noopener noreferrer"
+           style="display:inline-flex;align-items:center;gap:0.5rem;background:#C8102E;color:#fff;font-size:13px;font-weight:600;padding:0.625rem 1.25rem;border-radius:4px;text-decoration:none;transition:background 0.15s;"
+           onmouseover="this.style.background='#a00d24'" onmouseout="this.style.background='#C8102E'">
+          Talk to NashTech about where you sit
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 3L13 8L8 13M3 8H13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>`;
+  el.style.display = 'block';
+  requestAnimationFrame(() => { el.style.opacity = '1'; });
+}
+
+function initBenchmark() {
+  const grid = $('#benchmark-grid');
+  if (!grid) return;
+  grid.addEventListener('click', e => {
+    const btn = e.target.closest('button[data-q]');
+    if (!btn) return;
+    selectOption(btn.dataset.q, parseInt(btn.dataset.oi, 10));
+  });
+}
+
 // ── Boot ──────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
   renderStats();
@@ -357,7 +538,9 @@ document.addEventListener('DOMContentLoaded', () => {
   renderOffshoreOutcomes();
   renderPartnerClassification();
   renderThemes();
+  renderBenchmark();
   initExplainers();
   initPersonaFilter();
+  initBenchmark();
   requestAnimationFrame(initObserver);
 });

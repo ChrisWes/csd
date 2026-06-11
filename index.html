@@ -105,6 +105,25 @@
 </section>
 
 <!-- ══════════════════════════════════════════════════════════════
+     BENCHMARK
+═══════════════════════════════════════════════════════════════ -->
+<section style="background:#F8F8F6;padding:5rem 0;border-top:1px solid #E8E8E4;" aria-label="Peer benchmark">
+  <div class="max-w-7xl mx-auto px-6">
+
+    <p style="font-size:12px;font-weight:500;color:#4A4A48;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.75rem;">Peer benchmark</p>
+    <h2 data-animate style="font-size:32px;font-weight:600;color:#0F0F0F;letter-spacing:-0.01em;margin:0 0 0.5rem;">Where does your organisation sit?</h2>
+    <p style="font-size:16px;color:#4A4A48;line-height:1.6;margin:0 0 2.5rem;max-width:40rem;">
+      Four questions. See how you compare to 1,000 of your peers — and what the data says about organisations in your position.
+    </p>
+
+    <div id="benchmark-grid" style="display:grid;grid-template-columns:repeat(2,1fr);gap:1.25rem;" class="benchmark-grid-resp"></div>
+
+    <div id="benchmark-summary" style="display:none;opacity:0;transition:opacity 0.4s ease;"></div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
      WHY ORGANISATIONS BUILD
 ═══════════════════════════════════════════════════════════════ -->
 <section style="background:#fff;padding:5rem 0;" aria-label="Why organisations build custom software">
@@ -440,6 +459,7 @@
 <!-- Responsive overrides -->
 <style>
   @media (max-width: 1023px) {
+    .benchmark-grid-resp { grid-template-columns: 1fr !important; }
     .lg-two-col { grid-template-columns: 1fr !important; }
     .lg-two-col > div:last-child { border-left: none !important; padding-left: 0 !important; padding-top: 2rem; border-top: 1px solid #E8E8E4; }
     .ai-top-grid { grid-template-columns: 1fr !important; }
