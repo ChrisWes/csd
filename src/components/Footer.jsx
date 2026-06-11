@@ -1,5 +1,6 @@
 import React from 'react';
 import { meta } from '../data/surveyData.js';
+import ntLogo from '../ntlogo.png';
 
 export default function Footer() {
   return (
@@ -14,7 +15,7 @@ export default function Footer() {
             </p>
           </div>
 
-          {/* Centre — primary CTA */}
+          {/* Centre — primary CTAs */}
           <div className="flex items-center gap-4">
             <a
               href={meta.reportUrl}
@@ -33,6 +34,13 @@ export default function Footer() {
               Talk to NashTech
             </a>
           </div>
+
+          {/* Right — logo */}
+          <img
+            src={ntLogo}
+            alt="NashTech"
+            className="h-9 w-auto"
+          />
         </div>
 
         {/* Legal */}
