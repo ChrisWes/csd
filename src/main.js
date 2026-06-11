@@ -275,13 +275,21 @@ function initExplainers() {
   });
 }
 
+function explainerLabel(persona) {
+  if (persona === 'all') return 'All roles';
+  const p = personas[persona];
+  return p ? `${p.label} view` : persona;
+}
+
 function populateExplainer(el, persona) {
   const section = el.dataset.explainer;
   const data = chartExplainers[section];
   if (!data) return;
   const paras = data[persona] || data.all;
   el.classList.remove('ready');
-  el.innerHTML = paras.map(p => `<p>${p}</p>`).join('');
+  el.innerHTML =
+    `<p style="font-size:11px;font-weight:600;color:#C8102E;text-transform:uppercase;letter-spacing:0.1em;margin:0 0 1rem;">${explainerLabel(persona)}</p>` +
+    paras.map(p => `<p>${p}</p>`).join('');
   requestAnimationFrame(() => el.classList.add('ready'));
 }
 
