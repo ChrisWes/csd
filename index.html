@@ -1,16 +1,458 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Differentiating Through Custom Software — NashTech 2026</title>
-    <meta name="description" content="Findings from NashTech's 2026 UK survey of 1,000 senior technology leaders on custom software development." />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Differentiating Through Custom Software — NashTech 2026</title>
+  <meta name="description" content="Findings from NashTech's 2026 UK survey of 1,000 senior technology leaders on custom software development." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="src/styles.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════════════════
+     NAV
+═══════════════════════════════════════════════════════════════ -->
+<nav style="position:fixed;top:0;left:0;right:0;z-index:50;background:#fff;height:56px;border-bottom:1px solid #E8E8E4;" aria-label="Site navigation">
+  <div class="max-w-7xl mx-auto px-6 h-full flex items-center justify-between">
+    <div class="flex items-baseline gap-3">
+      <span style="font-size:18px;font-weight:700;color:#0F0F0F;letter-spacing:-0.02em;">NashTech</span>
+      <span style="font-size:13px;color:#4A4A48;">Research 2026</span>
+    </div>
+    <div class="flex items-center gap-5">
+      <a href="https://www.nashtechglobal.com/our-thinking/reports/differentiating-through-custom-software/"
+         target="_blank" rel="noopener noreferrer"
+         style="font-size:13px;color:#C8102E;border:1px solid rgba(200,16,46,0.4);padding:0.375rem 1rem;border-radius:4px;text-decoration:none;transition:background 0.15s;"
+         onmouseover="this.style.background='rgba(200,16,46,0.05)'" onmouseout="this.style.background='transparent'">
+        Download the report
+      </a>
+      <img src="src/ntlogo.png" alt="NashTech" style="height:28px;width:auto;" />
+    </div>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════════════════════════════
+     HERO
+═══════════════════════════════════════════════════════════════ -->
+<section style="min-height:100vh;display:flex;align-items:center;padding-top:56px;" aria-label="Hero — survey headline">
+  <div class="max-w-7xl mx-auto px-6 w-full py-20" style="display:grid;grid-template-columns:3fr 2fr;gap:5rem;align-items:center;">
+
+    <!-- Left -->
+    <div>
+      <p class="hero-item" style="font-size:12px;font-weight:500;color:#4A4A48;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:1.5rem;animation-delay:0.1s;">
+        1,000 technology leaders · 6 territories · 2026
+      </p>
+      <h1 class="hero-item" style="margin-bottom:1.5rem;animation-delay:0.2s;">
+        <span style="display:block;font-size:clamp(48px,6vw,80px);font-weight:800;color:#0F0F0F;line-height:1;letter-spacing:-0.04em;">Custom software</span>
+        <span style="display:block;font-size:clamp(48px,6vw,80px);font-weight:800;color:#C8102E;line-height:1;letter-spacing:-0.04em;">is the edge.</span>
+      </h1>
+      <p class="hero-item" style="font-size:20px;color:#4A4A48;line-height:1.5;margin-bottom:2.5rem;max-width:36rem;animation-delay:0.3s;">
+        Not every organisation has realised it yet.
+      </p>
+      <a href="#findings" class="hero-item"
+         style="display:inline-flex;align-items:center;gap:0.5rem;background:#C8102E;color:#fff;font-size:15px;font-weight:600;padding:0.875rem 1.75rem;border-radius:4px;text-decoration:none;transition:background 0.15s;animation-delay:0.4s;"
+         onmouseover="this.style.background='#a00d24'" onmouseout="this.style.background='#C8102E'">
+        Explore the findings
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M8 3L13 8L8 13M3 8H13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+
+    <!-- Right -->
+    <div style="text-align:right;" class="hero-item" style="animation-delay:0.5s;">
+      <div style="font-size:clamp(80px,12vw,120px);font-weight:800;color:#0F0F0F;line-height:1;letter-spacing:-0.04em;margin-bottom:0.75rem;" aria-label="70 percent">70%</div>
+      <p style="font-size:16px;color:#4A4A48;line-height:1.6;max-width:280px;margin-left:auto;">of organisations now choose custom over off-the-shelf</p>
+      <span class="hero-rule" aria-hidden="true"></span>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     FINDINGS ANCHOR + PERSONA FILTER
+═══════════════════════════════════════════════════════════════ -->
+<div id="findings">
+
+<div style="position:sticky;top:56px;z-index:40;background:#fff;border-bottom:1px solid #E8E8E4;">
+  <div class="max-w-7xl mx-auto px-6 py-3">
+    <div class="persona-pills" role="group" aria-label="Filter by role">
+      <div style="display:flex;gap:0.5rem;min-width:max-content;">
+        <button data-persona="all"      aria-pressed="true"  style="font-size:13px;font-weight:500;padding:0.375rem 1rem;border-radius:9999px;border:1px solid #C8102E;background:#C8102E;color:#fff;cursor:pointer;white-space:nowrap;">All</button>
+        <button data-persona="ceo"      aria-pressed="false" style="font-size:13px;font-weight:500;padding:0.375rem 1rem;border-radius:9999px;border:1px solid #E8E8E4;background:#fff;color:#4A4A48;cursor:pointer;white-space:nowrap;">CEO</button>
+        <button data-persona="cfo"      aria-pressed="false" style="font-size:13px;font-weight:500;padding:0.375rem 1rem;border-radius:9999px;border:1px solid #E8E8E4;background:#fff;color:#4A4A48;cursor:pointer;white-space:nowrap;">CFO</button>
+        <button data-persona="cio"      aria-pressed="false" style="font-size:13px;font-weight:500;padding:0.375rem 1rem;border-radius:9999px;border:1px solid #E8E8E4;background:#fff;color:#4A4A48;cursor:pointer;white-space:nowrap;">CIO / CTO</button>
+        <button data-persona="cdo"      aria-pressed="false" style="font-size:13px;font-weight:500;padding:0.375rem 1rem;border-radius:9999px;border:1px solid #E8E8E4;background:#fff;color:#4A4A48;cursor:pointer;white-space:nowrap;">CDO</button>
+        <button data-persona="architect" aria-pressed="false" style="font-size:13px;font-weight:500;padding:0.375rem 1rem;border-radius:9999px;border:1px solid #E8E8E4;background:#fff;color:#4A4A48;cursor:pointer;white-space:nowrap;">Senior Architect</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Persona banner (populated by JS) -->
+<div id="persona-banner" style="background:#fff;border-bottom:1px solid #E8E8E4;" aria-live="polite"></div>
+
+<!-- ══════════════════════════════════════════════════════════════
+     HEADLINE STATS
+═══════════════════════════════════════════════════════════════ -->
+<section style="background:#F8F8F6;padding:5rem 0;" aria-label="Headline statistics">
+  <div class="max-w-7xl mx-auto px-6">
+    <div id="headline-stats-grid"></div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     WHY ORGANISATIONS BUILD
+═══════════════════════════════════════════════════════════════ -->
+<section style="background:#fff;padding:5rem 0;" aria-label="Why organisations build custom software">
+  <div class="max-w-7xl mx-auto px-6">
+
+    <p style="font-size:12px;font-weight:500;color:#4A4A48;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.75rem;">Theme 1</p>
+    <h2 data-animate style="font-size:32px;font-weight:600;color:#0F0F0F;letter-spacing:-0.01em;margin:0 0 2rem;">Why organisations build their own</h2>
+
+    <div style="display:grid;grid-template-columns:1fr 320px;gap:3rem;align-items:start;" class="lg-two-col">
+
+      <div>
+        <p style="font-size:16px;color:#4A4A48;line-height:1.7;margin-bottom:2.5rem;max-width:48rem;">
+          Integration is simultaneously the top driver of custom software adoption and its greatest delivery challenge — the same force fuelling demand and throttling execution.
+        </p>
+        <div id="build-drivers-chart" style="display:flex;flex-direction:column;gap:0.75rem;"></div>
+
+        <h3 style="font-size:17px;font-weight:600;color:#0F0F0F;margin:2.5rem 0 0.25rem;">Integration as a build driver, by sector</h3>
+        <p style="font-size:13px;color:#4A4A48;margin-bottom:0.75rem;">% citing integration as a reason to build custom</p>
+        <div id="integration-industry" style="display:grid;grid-template-columns:repeat(4,1fr);border:1px solid #E8E8E4;border-radius:4px;overflow:hidden;" class="integration-grid"></div>
+      </div>
+
+      <div style="border-left:1px solid #E8E8E4;padding-left:2.5rem;">
+        <div class="explainer" data-explainer="buildDrivers"></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     AI AMBITION VS READINESS
+═══════════════════════════════════════════════════════════════ -->
+<section style="background:#F8F8F6;padding:5rem 0;" aria-label="AI ambition vs readiness">
+  <div class="max-w-7xl mx-auto px-6">
+
+    <p style="font-size:12px;font-weight:500;color:#4A4A48;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.75rem;">Theme 4</p>
+    <h2 data-animate style="font-size:32px;font-weight:600;color:#0F0F0F;letter-spacing:-0.01em;margin:0 0 2.5rem;">AI ambition vs operational readiness</h2>
+
+    <div style="display:grid;grid-template-columns:1fr 320px;gap:3rem;align-items:start;" class="lg-two-col">
+
+      <div>
+        <!-- Donuts + blockers -->
+        <h3 style="font-size:18px;font-weight:600;color:#0F0F0F;margin:0 0 0.5rem;">Adopting AI: 85%. Building governance alongside it: 75%.</h3>
+        <p style="font-size:13px;color:#4A4A48;margin-bottom:2rem;">One in four organisations is building AI capability without a governance framework.</p>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:3rem;margin-bottom:3rem;" class="ai-top-grid">
+          <div>
+            <div id="ai-donuts" style="display:flex;gap:2rem;justify-content:center;flex-wrap:wrap;"></div>
+          </div>
+          <div>
+            <h4 style="font-size:15px;font-weight:600;color:#0F0F0F;margin:0 0 1rem;">What's slowing it down</h4>
+            <div id="ai-blockers-chart" style="display:flex;flex-direction:column;gap:0.75rem;"></div>
+          </div>
+        </div>
+
+        <!-- AI stack -->
+        <h3 style="font-size:18px;font-weight:600;color:#0F0F0F;margin:0 0 0.25rem;">Where are organisations investing in the AI stack?</h3>
+        <p style="font-size:13px;color:#4A4A48;margin-bottom:1.25rem;">Prioritised for investment or transformation, next 12–24 months</p>
+        <div id="ai-stack-chart" style="display:flex;flex-direction:column;gap:0.625rem;"></div>
+      </div>
+
+      <div style="border-left:1px solid #E8E8E4;padding-left:2.5rem;">
+        <div class="explainer" data-explainer="ai"></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     PERCEPTION GAP — SIGNATURE SECTION
+═══════════════════════════════════════════════════════════════ -->
+<section style="background:#fff;padding:6rem 0;" aria-label="The perception gap">
+  <div class="max-w-7xl mx-auto px-6">
+
+    <p data-animate style="font-size:12px;font-weight:500;color:#4A4A48;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.75rem;">The perception gap · Theme 5</p>
+    <h2 data-animate style="font-size:clamp(28px,4vw,44px);font-weight:700;color:#0F0F0F;line-height:1.2;letter-spacing:-0.02em;max-width:48rem;margin:0 0 3rem;">
+      63% of leaders say projects exceeded expectations.
+      <span style="color:#C8102E;"> 39% of the people delivering them agree.</span>
+    </h2>
+
+    <div style="display:grid;grid-template-columns:1fr 320px;gap:3rem;align-items:start;" class="lg-two-col">
+      <div>
+
+        <!-- Two numbers -->
+        <div data-animate style="display:flex;align-items:center;justify-content:center;gap:0;margin-bottom:1rem;flex-wrap:wrap;">
+          <div style="display:flex;flex-direction:column;align-items:center;">
+            <span data-count="63" data-unit="%" style="font-size:clamp(64px,8vw,88px);font-weight:800;color:#0F0F0F;line-height:1;letter-spacing:-0.04em;" aria-label="63%">63%</span>
+            <span style="font-size:13px;font-weight:500;color:#4A4A48;text-transform:uppercase;letter-spacing:0.08em;margin-top:0.75rem;">C-suite and board</span>
+          </div>
+          <div style="width:1px;height:7rem;background:#E8E8E4;margin:0 3rem;" aria-hidden="true"></div>
+          <div style="display:flex;flex-direction:column;align-items:center;">
+            <span data-count="39" data-unit="%" style="font-size:clamp(64px,8vw,88px);font-weight:800;color:#C8102E;line-height:1;letter-spacing:-0.04em;" aria-label="39%">39%</span>
+            <span style="font-size:13px;font-weight:500;color:#4A4A48;text-transform:uppercase;letter-spacing:0.08em;margin-top:0.75rem;">Delivery managers</span>
+          </div>
+        </div>
+
+        <!-- Gap annotation -->
+        <div data-animate style="display:flex;flex-direction:column;align-items:center;margin-bottom:3.5rem;">
+          <div style="display:flex;align-items:center;gap:0.5rem;color:#C8102E;">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M8 2v12M3 9l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span style="font-size:15px;font-weight:600;">24 point gap</span>
+          </div>
+        </div>
+
+        <!-- Split thermometer -->
+        <div class="thermo" data-animate style="max-width:40rem;margin:0 auto 4rem;" aria-label="Gap visualisation: 63% vs 39%">
+          <div style="display:flex;height:12px;border-radius:9999px;overflow:hidden;background:#E8E8E4;">
+            <div class="thermo-left" style="background:#0F0F0F;width:0;" data-pct="63"></div>
+            <div class="thermo-right" style="background:#C8102E;width:0;" data-pct="39"></div>
+          </div>
+          <div style="display:flex;justify-content:space-between;margin-top:0.5rem;">
+            <span style="font-size:11px;color:#4A4A48;text-transform:uppercase;letter-spacing:0.08em;">0%</span>
+            <span style="font-size:11px;color:#4A4A48;text-transform:uppercase;letter-spacing:0.08em;">100%</span>
+          </div>
+        </div>
+
+        <!-- Delivery-team stats + quote -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:3rem;" class="perc-bottom">
+          <div>
+            <h3 style="font-size:14px;font-weight:600;color:#4A4A48;text-transform:uppercase;letter-spacing:0.05em;margin:0 0 1.25rem;">What delivery teams are actually experiencing</h3>
+            <div style="display:flex;flex-direction:column;gap:1.25rem;">
+              <div style="display:flex;align-items:flex-start;gap:1rem;">
+                <span style="font-size:40px;font-weight:800;color:#C8102E;line-height:1;flex-shrink:0;">36%</span>
+                <p style="font-size:15px;color:#4A4A48;line-height:1.7;padding-top:0.25rem;margin:0;">of mid-level managers report scope creep as a recurring delivery challenge</p>
+              </div>
+              <div style="display:flex;align-items:flex-start;gap:1rem;">
+                <span style="font-size:40px;font-weight:800;color:#C8102E;line-height:1;flex-shrink:0;">46%</span>
+                <p style="font-size:15px;color:#4A4A48;line-height:1.7;padding-top:0.25rem;margin:0;">point to integration challenges as their primary delivery blocker</p>
+              </div>
+            </div>
+          </div>
+          <div style="border-left:1px solid #E8E8E4;padding-left:2rem;">
+            <p style="font-size:18px;font-style:italic;color:#0F0F0F;line-height:1.7;margin:0 0 1rem;">
+              "Misalignment between business goals and technical implementation usually happens when stakeholders and technical teams interpret objectives differently. This leads to mismatched deliverables."
+            </p>
+            <p style="font-size:13px;color:#4A4A48;text-transform:uppercase;letter-spacing:0.08em;margin:0;">Survey respondent</p>
+          </div>
+        </div>
+
+        <p data-animate style="font-size:18px;font-style:italic;color:#0F0F0F;line-height:1.6;margin-top:3.5rem;max-width:40rem;">
+          The gap rarely stems from lack of ambition. It stems from measuring success differently at each level.
+        </p>
+
+      </div>
+
+      <div style="border-left:1px solid #E8E8E4;padding-left:2.5rem;">
+        <div class="explainer" data-explainer="perceptionGap"></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     OFFSHORE OUTCOMES
+═══════════════════════════════════════════════════════════════ -->
+<section style="background:#F8F8F6;padding:6rem 0;" aria-label="Offshore development outcomes">
+  <div class="max-w-7xl mx-auto px-6">
+
+    <p style="font-size:12px;font-weight:500;color:#4A4A48;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.75rem;">Theme 10 · The offshore reality check</p>
+
+    <div style="display:grid;grid-template-columns:1fr 320px;gap:3rem;align-items:start;" class="lg-two-col">
+      <div>
+
+        <!-- Two large stats -->
+        <div style="display:flex;align-items:flex-start;gap:4rem;flex-wrap:wrap;margin-bottom:3.5rem;">
+          <div>
+            <span data-count="92" data-unit="%" style="font-size:clamp(56px,7vw,80px);font-weight:800;color:#0F0F0F;line-height:1;letter-spacing:-0.04em;display:block;" aria-label="92%">92%</span>
+            <p style="font-size:14px;color:#4A4A48;margin:0.75rem 0 0;max-width:10rem;line-height:1.4;">use offshore partners</p>
+          </div>
+          <div style="width:1px;height:5rem;background:#E8E8E4;margin-top:0.5rem;" aria-hidden="true"></div>
+          <div>
+            <span data-count="99" data-unit="%" style="font-size:clamp(56px,7vw,80px);font-weight:800;color:#0F0F0F;line-height:1;letter-spacing:-0.04em;display:block;" aria-label="99%">99%</span>
+            <p style="font-size:14px;color:#4A4A48;margin:0.75rem 0 0;max-width:12rem;line-height:1.4;">of those report better outcomes</p>
+          </div>
+        </div>
+
+        <!-- Outcomes chart -->
+        <h3 style="font-size:20px;font-weight:600;color:#0F0F0F;margin:0 0 0.25rem;">What's actually improving</h3>
+        <p style="font-size:13px;color:#4A4A48;margin-bottom:1.5rem;">Base: Organisations using offshore partners</p>
+        <div id="offshore-chart" style="display:flex;flex-direction:column;gap:0.75rem;"></div>
+
+        <!-- Pull quote -->
+        <div data-animate style="border-left:2px solid #E8E8E4;padding-left:1.5rem;margin:2.5rem 0;">
+          <p style="font-size:22px;font-weight:700;color:#C8102E;line-height:0.8;margin-bottom:0.5rem;" aria-hidden="true">"</p>
+          <p style="font-size:17px;font-style:italic;color:#0F0F0F;line-height:1.7;margin:0 0 0.75rem;">
+            We work with technical partners in two different ways. The first is where they are embedded in our teams and we treat them like our employees. This is what we have with NashTech's offshore development team. It works well and it's got us to where we are today.
+          </p>
+          <p style="font-size:13px;color:#4A4A48;text-transform:uppercase;letter-spacing:0.08em;margin:0;">Matt Pilcer, CTO · Unified, US</p>
+        </div>
+
+        <p style="font-size:17px;font-style:italic;color:#4A4A48;">The risk is not offshore itself. The risk is the wrong operating model around it.</p>
+
+      </div>
+
+      <div style="border-left:1px solid #E8E8E4;padding-left:2.5rem;">
+        <div class="explainer" data-explainer="offshore"></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     PARTNER MATURITY
+═══════════════════════════════════════════════════════════════ -->
+<section style="background:#fff;padding:6rem 0;" aria-label="Partner maturity">
+  <div class="max-w-7xl mx-auto px-6">
+
+    <p style="font-size:12px;font-weight:500;color:#4A4A48;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.75rem;">Theme 9 · Partners</p>
+    <h2 data-animate style="font-size:32px;font-weight:600;color:#0F0F0F;letter-spacing:-0.01em;margin:0 0 0.5rem;">
+      Only <span style="color:#C8102E;">32%</span> have a strategic partner.
+      <span style="color:#C8102E;">97%</span> want one.
+    </h2>
+
+    <div style="display:grid;grid-template-columns:1fr 320px;gap:3rem;align-items:start;margin-top:2.5rem;" class="lg-two-col">
+      <div>
+        <div id="partner-chart" style="display:flex;flex-direction:column;"></div>
+
+        <!-- Org size comparison -->
+        <div data-animate style="display:grid;grid-template-columns:1fr 1fr;max-width:32rem;margin-top:2.5rem;">
+          <div style="border:1px solid #E8E8E4;border-radius:4px 0 0 4px;padding:1.5rem;">
+            <div style="font-size:40px;font-weight:800;color:#4A4A48;line-height:1;margin-bottom:0.5rem;">28%</div>
+            <p style="font-size:13px;color:#4A4A48;line-height:1.4;margin:0;">of <strong style="font-weight:600;color:#0F0F0F;">smaller enterprises</strong> see their partner as strategic</p>
+          </div>
+          <div style="border:1px solid #E8E8E4;border-left:none;border-radius:0 4px 4px 0;padding:1.5rem;background:#F8F8F6;">
+            <div style="font-size:40px;font-weight:800;color:#C8102E;line-height:1;margin-bottom:0.5rem;">45%</div>
+            <p style="font-size:13px;color:#4A4A48;line-height:1.4;margin:0;">of <strong style="font-weight:600;color:#0F0F0F;">larger enterprises</strong> see their partner as strategic</p>
+          </div>
+        </div>
+
+        <p data-animate style="font-size:18px;font-style:italic;color:#0F0F0F;line-height:1.6;margin-top:2.5rem;max-width:40rem;">
+          The jump from trusted to strategic is not a procurement decision. It is a relationship architecture.
+        </p>
+      </div>
+
+      <div style="border-left:1px solid #E8E8E4;padding-left:2.5rem;">
+        <div class="explainer" data-explainer="partnerMaturity"></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     THEME GRID
+═══════════════════════════════════════════════════════════════ -->
+<section style="background:#F8F8F6;padding:6rem 0;" aria-label="Ten themes from the report">
+  <div class="max-w-7xl mx-auto px-6">
+    <p style="font-size:12px;font-weight:500;color:#4A4A48;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.75rem;">The full picture</p>
+    <h2 data-animate style="font-size:32px;font-weight:600;color:#0F0F0F;letter-spacing:-0.01em;margin:0 0 2.5rem;">Ten themes from 1,000 leaders</h2>
+    <div id="theme-grid" style="display:grid;grid-template-columns:repeat(5,1fr);gap:0.75rem;" class="theme-grid-resp"></div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     QUOTES
+═══════════════════════════════════════════════════════════════ -->
+<section style="background:#fff;padding:6rem 0;border-top:1px solid #E8E8E4;" aria-label="Voices from the research">
+  <div class="max-w-7xl mx-auto px-6">
+    <p style="font-size:12px;font-weight:500;color:#4A4A48;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:2.5rem;">Voices from the research</p>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;" class="quotes-grid">
+
+      <div data-animate style="animation-delay:0s;">
+        <p style="font-size:72px;font-weight:700;color:#C8102E;line-height:0.8;margin-bottom:1rem;" aria-hidden="true">"</p>
+        <p style="font-size:18px;font-style:italic;color:#0F0F0F;line-height:1.7;margin-bottom:1.25rem;">
+          The time to build software is when it gives you an advantage in a competitive market. We build our business around industry best standards — so what tips the balance is commercial needs rather than what a supplier can offer us.
+        </p>
+        <p style="font-size:13px;color:#4A4A48;text-transform:uppercase;letter-spacing:0.08em;">IT Leader · North West, UK</p>
+      </div>
+
+      <div data-animate style="animation-delay:0.12s;">
+        <p style="font-size:72px;font-weight:700;color:#C8102E;line-height:0.8;margin-bottom:1rem;" aria-hidden="true">"</p>
+        <p style="font-size:18px;font-style:italic;color:#0F0F0F;line-height:1.7;margin-bottom:1.25rem;">
+          We see our custom software providers as partners — they have to be part of our team. It's more productive and it creates transparency too.
+        </p>
+        <p style="font-size:13px;color:#4A4A48;text-transform:uppercase;letter-spacing:0.08em;">IT Leader · US</p>
+      </div>
+
+      <div data-animate style="animation-delay:0.24s;">
+        <p style="font-size:72px;font-weight:700;color:#C8102E;line-height:0.8;margin-bottom:1rem;" aria-hidden="true">"</p>
+        <p style="font-size:18px;font-style:italic;color:#0F0F0F;line-height:1.7;margin-bottom:1.25rem;">
+          What we ultimately look for is a custom software partner who understands us. They need a deep understanding of who we are, including our values and ethos.
+        </p>
+        <p style="font-size:13px;color:#4A4A48;text-transform:uppercase;letter-spacing:0.08em;">Ross Bray, IT and Operational Senior Manager · Velociti, UK</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     FOOTER
+═══════════════════════════════════════════════════════════════ -->
+<footer style="background:#fff;border-top:1px solid #E8E8E4;padding:3rem 0;" role="contentinfo">
+  <div class="max-w-7xl mx-auto px-6">
+    <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:2rem;margin-bottom:2rem;">
+
+      <div>
+        <div style="font-size:18px;font-weight:700;color:#0F0F0F;margin-bottom:0.25rem;">NashTech</div>
+        <p style="font-size:13px;color:#4A4A48;margin:0;">Differentiating Through Custom Software · 2026 UK Survey</p>
+      </div>
+
+      <div style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap;">
+        <a href="https://www.nashtechglobal.com/our-thinking/reports/differentiating-through-custom-software/"
+           target="_blank" rel="noopener noreferrer"
+           style="display:inline-block;background:#C8102E;color:#fff;font-size:14px;font-weight:600;padding:0.75rem 1.5rem;border-radius:4px;text-decoration:none;transition:background 0.15s;"
+           onmouseover="this.style.background='#a00d24'" onmouseout="this.style.background='#C8102E'">
+          Read the full report
+        </a>
+        <a href="https://www.nashtechglobal.com/contact/"
+           target="_blank" rel="noopener noreferrer"
+           style="display:inline-block;color:#0F0F0F;font-size:14px;font-weight:600;padding:0.75rem 1.5rem;border-radius:4px;border:1px solid #E8E8E4;text-decoration:none;transition:border-color 0.15s;"
+           onmouseover="this.style.borderColor='#4A4A48'" onmouseout="this.style.borderColor='#E8E8E4'">
+          Talk to NashTech
+        </a>
+      </div>
+
+      <img src="src/ntlogo.png" alt="NashTech" style="height:36px;width:auto;" />
+
+    </div>
+    <p style="font-size:12px;color:#4A4A48;border-top:1px solid #E8E8E4;padding-top:1.5rem;margin:0;">
+      Research conducted by Vanson Bourne on behalf of NashTech, 2025. N=1,000.
+    </p>
+  </div>
+</footer>
+
+</div><!-- #findings -->
+
+<!-- Responsive overrides -->
+<style>
+  @media (max-width: 1023px) {
+    .lg-two-col { grid-template-columns: 1fr !important; }
+    .lg-two-col > div:last-child { border-left: none !important; padding-left: 0 !important; padding-top: 2rem; border-top: 1px solid #E8E8E4; }
+    .ai-top-grid { grid-template-columns: 1fr !important; }
+    .perc-bottom { grid-template-columns: 1fr !important; }
+    .quotes-grid { grid-template-columns: 1fr !important; }
+    .theme-grid-resp { grid-template-columns: repeat(2,1fr) !important; }
+    .integration-grid { grid-template-columns: repeat(2,1fr) !important; }
+  }
+  @media (max-width: 639px) {
+    .theme-grid-resp { grid-template-columns: 1fr !important; }
+  }
+</style>
+
+<script type="module" src="src/main.js"></script>
+</body>
 </html>
