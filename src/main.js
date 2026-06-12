@@ -527,6 +527,9 @@ function initBenchmark() {
   });
 }
 
+// ── Visit beacon ─────────────────────────────────────────────
+fetch('/api/visits', { method: 'POST' }).catch(() => {});
+
 // ── Boot ──────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
   renderStats();
