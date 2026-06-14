@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Differentiating Through Custom Software — NashTech 2026</title>
+  <meta name="description" content="What 1,000 senior technology leaders told us about custom software — and what they learned when they built it." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="scrolly.css" />
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav" aria-label="Site navigation">
+  <div class="nav-inner">
+    <div class="nav-left">
+      <a href="https://www.nashtechglobal.com" target="_blank" rel="noopener noreferrer" class="nav-brand">NashTech</a>
+      <span class="nav-sep" aria-hidden="true"></span>
+      <span class="nav-sub">Research 2026</span>
+    </div>
+    <div class="nav-right">
+      <div class="nav-progress-track" aria-hidden="true">
+        <div class="nav-progress-bar" id="progress-bar"></div>
+      </div>
+      <a id="nav-report-link" href="#" class="nav-download" target="_blank" rel="noopener noreferrer">Download the report</a>
+    </div>
+  </div>
+</nav>
+
+<!-- OPENING — full viewport, not part of scrolly grid -->
+<section class="opening-section" aria-label="Opening — survey headline">
+  <div class="opening-content">
+    <p class="opening-eyebrow fade-seq" style="--seq:1">1,000 technology leaders · 6 territories · 2026</p>
+    <h1 class="fade-seq" style="--seq:2">
+      <span class="display-ink">Most organisations still buy their software.</span>
+      <span class="display-red">But <span id="hero-count" aria-label="70 percent">0</span>% are building where it counts.</span>
+    </h1>
+    <p class="opening-body fade-seq" style="--seq:3">
+      This is what they told us about why —<br>and what they learned when they did.
+    </p>
+  </div>
+  <div class="scroll-hint fade-seq" style="--seq:4" aria-label="Scroll to explore">
+    <span class="scroll-hint-label">Scroll to explore</span>
+    <svg class="scroll-chevron" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
+</section>
+
+<!-- SCROLLY CONTAINER — sticky viz + narrative overlay -->
+<div class="scrolly-outer" id="scrolly-outer">
+
+  <!-- STICKY VISUALISATION LAYER -->
+  <div class="sticky-viz" id="sticky-viz" aria-hidden="true">
+
+    <!-- Scene 1: Drivers bar chart -->
+    <div class="scene" id="scene-drivers">
+      <div class="scene-inner scene-chart-layout">
+        <h2 class="chart-title">What tips the decision toward custom</h2>
+        <svg id="drivers-svg" role="img" aria-label="Horizontal bar chart: reasons organisations choose custom software. Integration leads at 44%."></svg>
+      </div>
+    </div>
+
+    <!-- Scene 1c: Industry overlay (same chart, faded, with industry cells) -->
+    <div class="scene" id="scene-industry">
+      <div class="scene-inner scene-chart-layout industry-scene">
+        <h2 class="chart-title" style="opacity:0.4">What tips the decision toward custom</h2>
+        <svg id="drivers-svg-b" role="img" aria-label="Bar chart faded, industry data overlaid" style="opacity:0.25"></svg>
+        <div class="industry-overlay" id="industry-overlay">
+          <p class="industry-headline">Integration as a build driver, by sector</p>
+          <div class="industry-cells" id="industry-cells"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scene 2: Converging bars (paradox) -->
+    <div class="scene" id="scene-paradox">
+      <div class="scene-inner scene-paradox-layout">
+        <svg id="converging-svg" role="img" aria-label="Two bars converging toward centre: 44% choose custom for integration, 40% say integration is their biggest challenge."></svg>
+        <div class="ai-finding" id="ai-finding">
+          <p>43% say legacy integration is already a significant obstacle to adopting agentic AI.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scene 3a: Split screen gap -->
+    <div class="scene" id="scene-gap">
+      <div class="scene-inner scene-gap-layout" id="gap-layout">
+        <div class="gap-left" id="gap-left">
+          <span class="gap-eyebrow">C-suite and board</span>
+          <span class="gap-stat gap-stat-ink" id="stat-63">63%</span>
+          <span class="gap-desc">say their custom software projects<br>exceeded expectations</span>
+        </div>
+        <div class="gap-divider" id="gap-divider" aria-hidden="true">
+          <div class="gap-annotation" id="gap-ann">24 points</div>
+        </div>
+        <div class="gap-right" id="gap-right">
+          <span class="gap-eyebrow gap-eyebrow-red">Delivery managers</span>
+          <span class="gap-stat gap-stat-red" id="stat-39">39%</span>
+          <span class="gap-desc">say the same</span>
+        </div>
+        <div class="thermo-row" id="thermo-row">
+          <div class="thermo-bar-track">
+            <div class="thermo-segment thermo-l" id="thermo-l"></div>
+            <div class="thermo-segment thermo-r" id="thermo-r"></div>
+          </div>
+          <div class="thermo-labels">
+            <span class="thermo-lbl ink">C-suite: 63%</span>
+            <span class="thermo-lbl red">Delivery: 39%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scene 3b: Gap detail — right side updates -->
+    <div class="scene" id="scene-gapdetail">
+      <div class="scene-inner scene-gap-layout">
+        <div class="gap-left">
+          <span class="gap-eyebrow">C-suite and board</span>
+          <span class="gap-stat gap-stat-ink">63%</span>
+          <span class="gap-desc">say their custom software projects<br>exceeded expectations</span>
+        </div>
+        <div class="gap-divider gap-divider-static" aria-hidden="true">
+          <div class="gap-annotation">24 points</div>
+        </div>
+        <div class="gap-right-detail">
+          <span class="gap-eyebrow gap-eyebrow-red">Delivery managers</span>
+          <span class="gap-stat gap-stat-red" style="opacity:0.4">39%</span>
+          <div class="delivery-stats" id="delivery-stats">
+            <div class="d-stat">
+              <span class="d-num">36%</span>
+              <span class="d-text">report scope creep as a significant issue</span>
+            </div>
+            <div class="d-stat">
+              <span class="d-num">46%</span>
+              <span class="d-text">point to integration challenges as a primary friction point</span>
+            </div>
+          </div>
+          <blockquote class="gap-quote" id="gap-quote">
+            <p>"Misalignment between business goals and technical implementation usually happens when stakeholders and technical teams interpret objectives differently."</p>
+            <cite>Survey respondent</cite>
+          </blockquote>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scene 4: Partner maturity ladder -->
+    <div class="scene" id="scene-partners">
+      <div class="scene-inner scene-partners-layout">
+        <svg id="ladder-svg" role="img" aria-label="Partner maturity ladder: Tactical 7%, Project-based 14%, Trusted delivery 47%, Strategic partner 32%."></svg>
+        <div class="aspiration-row" id="aspiration-row">
+          <span class="asp-note">97% would invest more in a partner at this level.</span>
+          <span class="asp-red">32% have one.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scene 5: Closing panel -->
+    <div class="scene" id="scene-close">
+      <div class="scene-inner scene-close-layout">
+        <div class="close-beat" id="beat-1">
+          <p class="close-text-ink">97% of organisations say they would invest more<br>in a partner who consistently delivers long-term value.</p>
+        </div>
+        <div class="close-beat" id="beat-2">
+          <p class="close-text-red">32% of them have one.</p>
+        </div>
+        <div class="close-beat" id="beat-3">
+          <p class="close-sub">The gap between what organisations know they need and what they have settled for is where competitive advantage is currently being lost.</p>
+        </div>
+        <div class="close-footer" id="close-footer">
+          <div class="cf-brand">
+            <span class="cf-wordmark">NashTech</span>
+            <span class="cf-tag">Differentiating Through Custom Software · 2026</span>
+          </div>
+          <div class="cf-cta">
+            <a id="footer-report-link" href="#" class="btn-primary" target="_blank" rel="noopener noreferrer">Read the full report</a>
+            <a href="https://www.nashtechglobal.com/contact/" class="btn-secondary" target="_blank" rel="noopener noreferrer">Talk to NashTech</a>
+          </div>
+          <p class="cf-note">Research conducted by Vanson Bourne on behalf of NashTech, 2025. N=1,000.</p>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /sticky-viz -->
+
+  <!-- NARRATIVE COLUMN — scrolls over the sticky viz -->
+  <div class="narrative-column" id="narrative">
+
+    <!-- Step 0: Scene 1a — drivers chart, all bars -->
+    <div class="narrative-step" data-step="0">
+      <div class="step-content">
+        <p>The decision to build custom software is almost never ideological. Organisations with predominantly bought tech stacks reach specific points where what is available cannot do what the business needs.</p>
+        <p>Integration is the most common trigger. 44% of organisations chose custom specifically because it offered better fit with their existing systems than any available COTS solution.</p>
+      </div>
+    </div>
+
+    <!-- Step 1: Scene 1b — secondary highlight -->
+    <div class="narrative-step" data-step="1">
+      <div class="step-content">
+        <p>Close behind it: the need for roadmap control, better user experience, and security or data sovereignty requirements. These are not abstract preferences. They are the points at which a bought solution stops being fit for purpose.</p>
+      </div>
+    </div>
+
+    <!-- Step 2: Scene 1c — industry callout -->
+    <div class="narrative-step" data-step="2">
+      <div class="step-content">
+        <p>The integration driver runs across every sector we surveyed — strongest in IT and technology (61%), but present in manufacturing, consumer goods, and logistics at comparable levels. The friction is not sector-specific. The systems causing it are.</p>
+      </div>
+    </div>
+
+    <!-- Step 3: Scene 2a — converging bars -->
+    <div class="narrative-step" data-step="3">
+      <div class="step-content">
+        <p>There is a structural tension at the heart of custom software delivery that the survey data makes visible with unusual clarity.</p>
+        <p>The single most common reason organisations choose to build custom is better integration with existing systems. The single most common reason those projects run into difficulty is integration complexity.</p>
+        <p>The same force is driving demand and throttling delivery.</p>
+      </div>
+    </div>
+
+    <!-- Step 4: Scene 2b — AI stat appears -->
+    <div class="narrative-step" data-step="4">
+      <div class="step-content">
+        <p>The implication reaches beyond current delivery timelines. Legacy integration architecture is already the primary constraint on AI adoption for 43% of organisations surveyed. Custom software built on fragile integration foundations does not scale into an AI-native operating environment.</p>
+        <p>Integration is not a technical problem that sits beneath the strategy. For most organisations, it is the strategy — and it is being treated like plumbing.</p>
+      </div>
+    </div>
+
+    <!-- Step 5: Scene 3a — split screen, 63 vs 39 -->
+    <div class="narrative-step" data-step="5">
+      <div class="step-content">
+        <p>Senior leaders and the teams delivering their custom software programmes are not experiencing the same projects.</p>
+        <p>Board members and C-suite executives report strong outcomes against business cases. 63% say their projects exceeded expectations. Mid-level managers and those closest to daily delivery report a different picture. Only 39% say the same.</p>
+        <p>The 24-point gap between those two numbers is where return on investment quietly leaks.</p>
+      </div>
+    </div>
+
+    <!-- Step 6: Scene 3b — gap detail -->
+    <div class="narrative-step" data-step="6">
+      <div class="step-content">
+        <p>The gap is not a mystery. Delivery managers are dealing with scope creep, integration friction, and workarounds that never appear in the business case summary presented upward.</p>
+        <p>The problem is rarely lack of ambition. It is that success is being measured differently at every level of the organisation — and the discrepancy is not being surfaced.</p>
+      </div>
+    </div>
+
+    <!-- Step 7: Scene 4a — maturity ladder, all grey -->
+    <div class="narrative-step" data-step="7">
+      <div class="step-content">
+        <p>Most organisations using third-party software development partners describe that relationship as a trusted delivery arrangement — consistent, reliable, repeatable. 47% sit in this category.</p>
+        <p>32% have something more: a partner closely aligned with their long-term goals, involved in high-value strategic initiatives, with shared accountability for outcomes rather than outputs.</p>
+      </div>
+    </div>
+
+    <!-- Step 8: Scene 4b — strategic illuminated -->
+    <div class="narrative-step" data-step="8">
+      <div class="step-content">
+        <p>97% of respondents say they would invest more in a partner who consistently delivers long-term value. The gap between that aspiration and the 32% who currently have a strategic relationship is not a sourcing problem. It is a relationship architecture problem — and often a reflection of what was specified in the original procurement.</p>
+      </div>
+    </div>
+
+    <!-- Step 9: Scene 4c — offshore stat -->
+    <div class="narrative-step" data-step="9">
+      <div class="step-content">
+        <p>92% of organisations use offshore partners for custom software development. 99% of them report measurably better outcomes. The operating model — how the relationship is structured, governed, and maintained — determines which side of that equation you land on.</p>
+      </div>
+    </div>
+
+    <!-- Step 10: Scene 5a — beat 1 -->
+    <div class="narrative-step narrative-step-close" data-step="10">
+      <div class="step-content step-content-ghost"></div>
+    </div>
+
+    <!-- Step 11: Scene 5b — beat 2 -->
+    <div class="narrative-step narrative-step-close" data-step="11">
+      <div class="step-content step-content-ghost"></div>
+    </div>
+
+    <!-- Step 12: Scene 5c — beat 3 + footer -->
+    <div class="narrative-step narrative-step-close" data-step="12">
+      <div class="step-content step-content-ghost"></div>
+    </div>
+
+  </div><!-- /narrative-column -->
+
+</div><!-- /scrolly-outer -->
+
+<!-- CDN scripts -->
+<script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/scrollama@3.2.0/build/scrollama.min.js"></script>
+<script type="module" src="main.js"></script>
+
+</body>
+</html>
