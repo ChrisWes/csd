@@ -98,13 +98,17 @@ function renderDiagnostic() {
   if (!grid) return;
   grid.innerHTML = diagnostic.dimensions.map(dim => `
     <div class="diag-row" data-dim="${dim.id}">
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.75rem;flex-wrap:wrap;gap:0.5rem;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.6rem;flex-wrap:wrap;gap:0.5rem;">
         <span style="font-size:15px;font-weight:600;color:#0F0F0F;">${esc(dim.label)}</span>
         <div style="display:flex;gap:0.4rem;" role="group" aria-label="${esc(dim.label)} score, 1 to 5">
-          ${[1,2,3,4,5].map(v => `<button type="button" class="opt-btn" data-diag="${dim.id}" data-val="${v}" style="width:2.4rem;text-align:center;">${v}</button>`).join('')}
+          ${[1,2,3,4,5].map(v => `<button type="button" class="opt-btn" data-diag="${dim.id}" data-val="${v}" title="${esc(v)} — ${esc(anchorText(dim, v))}" style="width:2.4rem;text-align:center;">${v}</button>`).join('')}
         </div>
       </div>
-      <p class="diag-caption" data-caption-for="${dim.id}" style="font-size:12.5px;color:#4A4A48;min-height:1.2em;margin:0;"></p>
+      <div class="diag-scale-labels">
+        <span><strong>1</strong> ${esc(dim.anchors[1])}</span>
+        <span><strong>5</strong> ${esc(dim.anchors[5])}</span>
+      </div>
+      <p class="diag-caption" data-caption-for="${dim.id}" style="font-size:12.5px;color:#0F0F0F;font-weight:500;min-height:1.2em;margin:0.5rem 0 0;"></p>
     </div>`).join('');
 
   grid.addEventListener('click', (e) => {
@@ -116,7 +120,7 @@ function renderDiagnostic() {
     $$(`button[data-diag="${dimId}"]`, grid).forEach(b => b.classList.toggle('on', parseInt(b.dataset.val, 10) === val));
     const dim = diagnostic.dimensions.find(d => d.id === dimId);
     const cap = $(`[data-caption-for="${dimId}"]`, grid);
-    if (cap) cap.textContent = anchorText(dim, val);
+    if (cap) cap.textContent = `You scored this ${val}: ${anchorText(dim, val)}`;
     if (Object.keys(diagState).length === diagnostic.dimensions.length) showDiagnosticResult();
   });
 }

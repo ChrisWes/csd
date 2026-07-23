@@ -22,6 +22,14 @@
 }
 .diag-row:last-child, .score-row:last-child { border-bottom: none; }
 
+.diag-scale-labels {
+  display: flex; justify-content: space-between; gap: 1rem;
+  font-size: 11.5px; color: #4A4A48; line-height: 1.4;
+}
+.diag-scale-labels span { max-width: 48%; }
+.diag-scale-labels span:last-child { text-align: right; }
+.diag-scale-labels strong { color: #0F0F0F; font-weight: 700; margin-right: 0.3em; }
+
 /* ── Weakest-link reveal ──────────────────────────────────────── */
 #diagnostic-result {
   opacity: 0; transform: translateY(16px);
