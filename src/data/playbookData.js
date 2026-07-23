@@ -18,6 +18,11 @@ export const meta = {
   surveyMicrositeUrl: "index.html",
 };
 
+export const howToUseThisPage = {
+  label: "How to use this page",
+  body: "90 days, compressed into 5 minutes. The tools below are a preview of the real thinking and decisions — not a record of them happening here.",
+};
+
 // ── Section 1: The reality ─────────────────────────────────────
 export const signals = [
   { stat: 43, unit: "%", label: "lack internal AI expertise", meaning: "Capacity and ownership must be designed, not assumed." },
@@ -86,7 +91,7 @@ export const useCasePattern = {
 
 // ── Interactive 2: NashTech AI-ready scorecard (Section 2) ─────
 export const scorecard = {
-  intro: "Score each dimension from 1 to 4. Score independently first, then discuss the largest differences. The total is a planning heuristic, not an external benchmark — any critical risk can override it.",
+  intro: "Score each dimension from 1 to 4 for a use case you have in mind. The total is a planning heuristic, not an external benchmark — any critical risk can override it.",
   criticalIds: ["data", "governance", "ownership"],
   dimensions: [
     { id: "value", label: "Business value", options: ["Unclear", "Qualitative", "Metric drafted", "Baseline and target agreed"] },
@@ -150,6 +155,7 @@ export const governanceChecklist = [
 export const ninetyDayPath = {
   intro: "By day 90, the team should be able to make an evidence-based decision: scale, hold, rework or stop. The target is not a polished demo — it is a bounded capability used in a real workflow, with named owners, tested controls, measurable outcomes and a run plan.",
   evidenceNote: "The 90-day cadence is a delivery design choice, not a universal benchmark. It works when the scope is narrow enough to control, the workflow is measurable, and required data and owners are available. High-risk or deeply integrated use cases may need a longer path.",
+  phaseCardsIntro: "Each phase card shows what would need to be true to move forward — illustrative criteria, not a checklist to complete on this page.",
   phases: [
     {
       id: "entry", tag: "Before day 1", title: "Entry gate", weeks: 0, weekSpan: "Day 0", color: "#4A4A48",
@@ -250,7 +256,7 @@ export const scalingIntro = "Getting to production in 90 days is an achievement.
 
 // ── Interactive 5: The scaling test (Section 5) ─────────────────
 export const scalingTest = {
-  intro: "Before moving beyond your first production deployment, ask:",
+  intro: "Imagine it's six months after your first AI use case went live. Would the honest answer to all of these be yes?",
   questions: [
     "Can we explain the business value in measurable terms?",
     "Do we know who owns the capability after launch?",

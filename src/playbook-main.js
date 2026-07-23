@@ -3,7 +3,7 @@ import {
   useCasePattern, scorecard, successLoop, loopDiscipline, operatingDecisions,
   humanInLoop, humanInLoopIntro, governanceChecklist, ninetyDayPath, dayNinetyDecision,
   leadersLabQuote, scalingIntro, scalingTest, finalThought, closingQuestion, closingCta,
-  meta,
+  meta, howToUseThisPage,
 } from './data/playbookData.js';
 
 // ── Helpers ───────────────────────────────────────────────────
@@ -47,6 +47,13 @@ function initObserver() {
     });
   }, { threshold: 0.15 });
   $$('[data-animate], [data-count]').forEach(el => io.observe(el));
+}
+
+// ── How to use this page ────────────────────────────────────────
+function renderHowToUse() {
+  const el = $('#how-to-use-text');
+  if (!el) return;
+  el.innerHTML = `<strong style="color:#C8102E;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;font-size:11px;">${esc(howToUseThisPage.label)}</strong> &nbsp; ${esc(howToUseThisPage.body)}`;
 }
 
 // ── Section 1: The reality ──────────────────────────────────────
@@ -264,8 +271,8 @@ function renderHitl() {
 // ── Interactive 3: Governance checklist ─────────────────────────
 const govChecked = new Set();
 const GOV_MESSAGES = {
-  0: 'Start checking off controls as your team confirms them.',
-  full: 'All governance controls are in place. The design is ready to move to build.',
+  0: 'Nothing checked yet — click a control to start the walkthrough.',
+  full: 'That’s all 7. In practice, confirming each one with evidence — not a click — is what earns the move to build.',
 };
 function renderGovernance() {
   const list = $('#governance-list');
@@ -296,7 +303,7 @@ function updateGovProgress() {
   const n = govChecked.size;
   $('#gov-count').textContent = n;
   $('#gov-progress').style.width = `${(n / governanceChecklist.length) * 100}%`;
-  $('#gov-message').textContent = n === 0 ? GOV_MESSAGES[0] : (n === governanceChecklist.length ? GOV_MESSAGES.full : `${n} of ${governanceChecklist.length} controls confirmed.`);
+  $('#gov-message').textContent = n === 0 ? GOV_MESSAGES[0] : (n === governanceChecklist.length ? GOV_MESSAGES.full : `${n} of ${governanceChecklist.length} checked.`);
 }
 
 // ── Section 4: 90-day timeline ───────────────────────────────────
@@ -326,6 +333,8 @@ function renderTimeline() {
 function renderPhaseCards() {
   const el = $('#phase-cards');
   if (!el) return;
+  const introEl = $('#phase-cards-intro');
+  if (introEl) introEl.textContent = ninetyDayPath.phaseCardsIntro;
   el.innerHTML = ninetyDayPath.phases.map(p => `
     <div class="phase-card" data-animate style="border-top-color:${p.color};">
       <div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:0.5rem;margin-bottom:0.75rem;">
@@ -339,7 +348,7 @@ function renderPhaseCards() {
 
       <div style="display:grid;grid-template-columns:${p.weeklyFocus ? '1fr 1fr' : '1fr'};gap:2.5rem;" class="phase-inner-grid">
         <div>
-          <p style="font-size:11px;font-weight:600;color:#4A4A48;text-transform:uppercase;letter-spacing:0.06em;margin:0 0 0.75rem;">${p.gate ? 'Checklist' : 'Requirements'}</p>
+          <p style="font-size:11px;font-weight:600;color:#4A4A48;text-transform:uppercase;letter-spacing:0.06em;margin:0 0 0.75rem;">What would need to be true</p>
           <ul class="check-list">
             ${p.checklist.map(c => `<li><span class="tick" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.5 12L13 4" stroke="${p.color}" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>${esc(c)}</li>`).join('')}
           </ul>
@@ -383,6 +392,8 @@ function renderScalingSection() {
 
 const scaleState = {};
 function renderScalingTest() {
+  const introEl = $('#scaling-test-intro');
+  if (introEl) introEl.textContent = scalingTest.intro;
   const el = $('#scaling-questions');
   if (!el) return;
   el.innerHTML = scalingTest.questions.map((q, i) => `
@@ -424,6 +435,7 @@ fetch('/api/visits', { method: 'POST' }).catch(() => {});
 
 // ── Boot ──────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
+  renderHowToUse();
   renderSignals();
   renderShouldLists();
   renderLayers();
