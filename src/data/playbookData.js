@@ -20,7 +20,7 @@ export const meta = {
 
 export const howToUseThisPage = {
   label: "How to use this page",
-  body: "90 days, compressed into 5 minutes. The tools below are a preview of the real thinking and decisions — not a record of them happening here.",
+  body: "90 days, compressed into 5 minutes. The tools below are a preview of the real thinking and decisions you will need to make during this process.",
 };
 
 // ── Section 1: The reality ─────────────────────────────────────
