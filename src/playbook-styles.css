@@ -1,0 +1,134 @@
+/* NashTech Playbook microsite — additive styles (loads after styles.css) */
+
+/* ── Sticky section rail ─────────────────────────────────────── */
+.section-eyebrow {
+  font-size: 12px; font-weight: 500; color: #4A4A48;
+  text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.75rem;
+}
+
+/* ── Diagnostic / scorecard option buttons ──────────────────── */
+.opt-btn {
+  text-align: left; font-size: 13px; color: #4A4A48;
+  padding: 0.55rem 0.875rem; border-radius: 4px; border: 1px solid #E8E8E4;
+  background: #fff; cursor: pointer; line-height: 1.4;
+  transition: background 0.15s, color 0.15s, border-color 0.15s, font-weight 0.15s;
+}
+.opt-btn:hover { border-color: #C8c8c4; }
+.opt-btn.on { background: #0F0F0F; color: #fff; border-color: #0F0F0F; font-weight: 500; }
+.opt-btn.critical-on { background: #C8102E; color: #fff; border-color: #C8102E; font-weight: 500; }
+
+.diag-row, .score-row {
+  border-bottom: 1px solid #E8E8E4; padding: 1.5rem 0;
+}
+.diag-row:last-child, .score-row:last-child { border-bottom: none; }
+
+/* ── Weakest-link reveal ──────────────────────────────────────── */
+#diagnostic-result {
+  opacity: 0; transform: translateY(16px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+#diagnostic-result.show { opacity: 1; transform: none; }
+
+/* ── Scorecard verdict card ──────────────────────────────────── */
+#scorecard-result { opacity: 0; transition: opacity 0.4s ease; }
+
+/* ── 90-day timeline ──────────────────────────────────────────── */
+.timeline-track {
+  display: flex; width: 100%; height: 14px; border-radius: 9999px;
+  overflow: hidden; background: #E8E8E4;
+}
+.timeline-seg {
+  height: 100%; width: 0; transition: width 0.9s cubic-bezier(0.33,1,0.68,1);
+  position: relative;
+}
+.timeline-labels { display: flex; width: 100%; margin-top: 0.75rem; }
+.timeline-label { font-size: 12px; color: #4A4A48; }
+
+.phase-card {
+  border: 1px solid #E8E8E4; border-radius: 6px; padding: 1.75rem;
+  border-top: 3px solid #E8E8E4;
+}
+
+.check-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.6rem; }
+.check-list li { display: flex; align-items: flex-start; gap: 0.6rem; font-size: 13.5px; color: #4A4A48; line-height: 1.5; }
+.check-list .tick { flex-shrink: 0; margin-top: 2px; }
+
+.week-chip-row { display: flex; flex-direction: column; gap: 0; margin-top: 1rem; }
+.week-chip { display: grid; grid-template-columns: 3rem 1fr; gap: 1rem; padding: 0.6rem 0; border-bottom: 1px dashed #E8E8E4; align-items: baseline; }
+.week-chip:last-child { border-bottom: none; }
+.week-chip .wk-num { font-size: 12px; font-weight: 700; color: #4A4A48; text-transform: uppercase; letter-spacing: 0.05em; }
+.week-chip .wk-body { font-size: 13.5px; color: #0F0F0F; }
+.week-chip .wk-body span { display: block; font-size: 12.5px; color: #4A4A48; margin-top: 0.15rem; }
+
+/* ── Interactive governance checklist ───────────────────────── */
+.gov-item {
+  display: flex; align-items: flex-start; gap: 0.85rem; padding: 0.85rem 0;
+  border-bottom: 1px solid #E8E8E4; cursor: pointer;
+}
+.gov-item:last-child { border-bottom: none; }
+.gov-box {
+  flex-shrink: 0; width: 20px; height: 20px; border-radius: 4px; border: 1.5px solid #C8C8C4;
+  margin-top: 1px; display: flex; align-items: center; justify-content: center;
+  transition: background 0.15s, border-color 0.15s;
+}
+.gov-item.checked .gov-box { background: #5B2D8E; border-color: #5B2D8E; }
+.gov-item p { font-size: 14.5px; color: #4A4A48; line-height: 1.6; margin: 0; transition: color 0.15s; }
+.gov-item.checked p { color: #0F0F0F; }
+.gov-progress-track { background: #E8E8E4; border-radius: 9999px; height: 6px; overflow: hidden; }
+.gov-progress-fill { height: 100%; background: #5B2D8E; width: 0; transition: width 0.4s cubic-bezier(0.33,1,0.68,1); }
+
+/* ── Human-in-the-loop ladder ────────────────────────────────── */
+.ladder { display: flex; flex-direction: column-reverse; gap: 0.75rem; }
+.ladder-row {
+  display: grid; grid-template-columns: 3.5rem 1fr 1fr; gap: 1.25rem; align-items: center;
+  padding: 1.1rem 1.25rem; border-radius: 6px; background: #F8F8F6; border-left: 4px solid transparent;
+}
+.ladder-num { font-size: 26px; font-weight: 800; line-height: 1; }
+.ladder-col p { margin: 0; }
+.ladder-role { font-size: 13.5px; color: #0F0F0F; line-height: 1.45; }
+.ladder-use { font-size: 12px; color: #4A4A48; margin-top: 0.3rem !important; }
+
+/* ── Loop flow ────────────────────────────────────────────────── */
+.loop-flow { display: flex; flex-wrap: wrap; align-items: stretch; gap: 0; }
+.loop-node {
+  flex: 1 1 150px; min-width: 150px; background: #fff; border: 1px solid #E8E8E4; border-radius: 6px;
+  padding: 1.25rem; position: relative;
+}
+.loop-node .lnum { font-size: 22px; font-weight: 800; color: #5B2D8E; line-height: 1; margin-bottom: 0.5rem; }
+.loop-node h4 { font-size: 14px; font-weight: 600; color: #0F0F0F; margin: 0 0 0.4rem; }
+.loop-node p { font-size: 12px; color: #4A4A48; line-height: 1.5; margin: 0; }
+.loop-arrow { display: flex; align-items: center; justify-content: center; color: #C8C8C4; flex: 0 0 auto; padding: 0 0.35rem; }
+
+/* ── Day-90 decision cards ───────────────────────────────────── */
+.decision-card {
+  border: 1px solid #E8E8E4; border-radius: 6px; padding: 1.25rem; text-align: left; cursor: pointer;
+  background: #fff; transition: border-color 0.15s, background 0.15s;
+}
+.decision-card:hover { border-color: #C8C8C4; }
+.decision-card.on { border-color: #C8102E; background: rgba(200,16,46,0.04); }
+.decision-card .dc-label { font-size: 16px; font-weight: 700; color: #0F0F0F; }
+.decision-card.on .dc-label { color: #C8102E; }
+
+/* ── Scaling test toggles ────────────────────────────────────── */
+.scale-row { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; padding: 0.95rem 0; border-bottom: 1px solid #E8E8E4; }
+.scale-row:last-child { border-bottom: none; }
+.scale-row p { font-size: 14.5px; color: #0F0F0F; margin: 0; max-width: 34rem; line-height: 1.5; }
+.yn-toggle { display: flex; border: 1px solid #E8E8E4; border-radius: 9999px; overflow: hidden; flex-shrink: 0; }
+.yn-btn { font-size: 12.5px; font-weight: 600; padding: 0.4rem 1rem; background: #fff; color: #4A4A48; border: none; cursor: pointer; }
+.yn-btn.yes.on { background: #0E9E8E; color: #fff; }
+.yn-btn.no.on { background: #C8102E; color: #fff; }
+
+#scaling-verdict { opacity: 0; transition: opacity 0.4s ease; }
+
+@media (max-width: 1023px) {
+  .ladder-row { grid-template-columns: 1fr; gap: 0.4rem; }
+  .ladder-num { font-size: 20px; }
+  .phase-inner-grid { grid-template-columns: 1fr !important; }
+  .scorecard-result-grid { grid-template-columns: 1fr !important; text-align: left !important; }
+  .scorecard-result-grid > div:first-child { text-align: left !important; }
+}
+@media (max-width: 767px) {
+  .timeline-labels { flex-wrap: wrap; }
+  .score-opts-resp { grid-template-columns: repeat(2,1fr) !important; }
+  .scale-row { flex-direction: column; align-items: flex-start; gap: 0.6rem; }
+}

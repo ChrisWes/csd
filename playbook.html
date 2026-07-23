@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Closing the AI Execution Gap in 90 Days — NashTech Playbook</title>
+  <meta name="description" content="An interactive execution playbook for engineering, data and AI leaders: diagnose your constraints, score your readiness, and run a 12-week path to a controlled production decision." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="src/styles.css" />
+  <link rel="stylesheet" href="src/playbook-styles.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════════════════
+     NAV
+═══════════════════════════════════════════════════════════════ -->
+<nav style="position:fixed;top:0;left:0;right:0;z-index:50;background:#fff;height:88px;border-bottom:1px solid #E8E8E4;" aria-label="Site navigation">
+  <div class="max-w-7xl mx-auto px-6 h-full flex items-center justify-between">
+    <div class="flex items-baseline gap-3">
+      <span style="font-size:18px;font-weight:700;color:#0F0F0F;letter-spacing:-0.02em;">NashTech</span>
+      <span style="font-size:13px;color:#4A4A48;">AI Execution Playbook</span>
+    </div>
+    <div class="flex items-center gap-5">
+      <a href="index.html"
+         style="font-size:13px;color:#4A4A48;text-decoration:none;border-bottom:1px solid transparent;"
+         onmouseover="this.style.borderColor='#4A4A48'" onmouseout="this.style.borderColor='transparent'">
+        CSD Survey findings
+      </a>
+      <a href="https://www.nashtechglobal.com/contact/"
+         target="_blank" rel="noopener noreferrer"
+         style="font-size:13px;color:#C8102E;border:1px solid rgba(200,16,46,0.4);padding:0.375rem 1rem;border-radius:4px;text-decoration:none;transition:background 0.15s;"
+         onmouseover="this.style.background='rgba(200,16,46,0.05)'" onmouseout="this.style.background='transparent'">
+        Talk to NashTech
+      </a>
+      <img src="src/ntlogo.png" alt="NashTech" style="height:84px;width:auto;" />
+    </div>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════════════════════════════
+     HERO
+═══════════════════════════════════════════════════════════════ -->
+<section style="min-height:100vh;display:flex;align-items:center;padding-top:88px;" aria-label="Hero — playbook headline">
+  <div class="max-w-7xl mx-auto px-6 w-full py-20" style="display:grid;grid-template-columns:3fr 2fr;gap:5rem;align-items:center;" id="hero-grid">
+
+    <!-- Left -->
+    <div>
+      <p class="hero-item" style="font-size:12px;font-weight:500;color:#4A4A48;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:1.5rem;animation-delay:0.1s;">
+        An execution playbook for engineering, data and AI leaders · 2026
+      </p>
+      <h1 class="hero-item" style="margin-bottom:1.5rem;animation-delay:0.2s;">
+        <span style="display:block;font-size:clamp(40px,6vw,80px);font-weight:800;color:#0F0F0F;line-height:1;letter-spacing:-0.04em;">Closing the AI</span>
+        <span style="display:block;font-size:clamp(40px,6vw,80px);font-weight:800;color:#C8102E;line-height:1;letter-spacing:-0.04em;">execution gap.</span>
+      </h1>
+      <p class="hero-item" style="font-size:20px;color:#4A4A48;line-height:1.5;margin-bottom:2.5rem;max-width:36rem;animation-delay:0.3s;">
+        AI ambition is widespread. The constraint is the system around the model.
+      </p>
+      <a href="#diagnostic" class="hero-item"
+         style="display:inline-flex;align-items:center;gap:0.5rem;background:#C8102E;color:#fff;font-size:15px;font-weight:600;padding:0.875rem 1.75rem;border-radius:4px;text-decoration:none;transition:background 0.15s;animation-delay:0.4s;"
+         onmouseover="this.style.background='#a00d24'" onmouseout="this.style.background='#C8102E'">
+        Start the diagnostic
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M8 3L13 8L8 13M3 8H13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+
+    <!-- Right -->
+    <div class="hero-item" style="text-align:right;animation-delay:0.5s;">
+      <div style="font-size:clamp(72px,11vw,116px);font-weight:800;color:#0F0F0F;line-height:1;letter-spacing:-0.04em;" aria-label="90 days">90</div>
+      <p style="font-size:16px;color:#4A4A48;line-height:1.6;max-width:280px;margin-left:auto;">days from an approved use case to a controlled production decision</p>
+      <span class="hero-rule" aria-hidden="true"></span>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     SECTION 01 — THE REALITY
+═══════════════════════════════════════════════════════════════ -->
+<section id="reality" style="background:#F8F8F6;padding:6rem 0;border-top:1px solid #E8E8E4;" aria-label="Section one — the reality">
+  <div class="max-w-7xl mx-auto px-6">
+
+    <p class="section-eyebrow">Section 01 · The reality</p>
+    <h2 data-animate style="font-size:32px;font-weight:600;color:#0F0F0F;letter-spacing:-0.01em;margin:0 0 1rem;max-width:40rem;">
+      Most organisations don't lack ideas. They lack the system to execute them.
+    </h2>
+    <p data-animate style="font-size:16px;color:#4A4A48;line-height:1.7;margin:0 0 3rem;max-width:44rem;">
+      They struggle to turn a promising AI concept into a capability that can operate inside existing data, architecture, risk and workflow constraints. That is the execution gap.
+    </p>
+
+    <!-- Signals -->
+    <div id="signals-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-bottom:1rem;" class="signals-grid-resp"></div>
+    <p style="font-size:12px;color:#4A4A48;margin:0 0 4rem;">Source: NashTech, The state of custom software development 2026.</p>
+
+    <!-- Should / should not -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:3rem;margin-bottom:4rem;" class="lg-two-col-even">
+      <div>
+        <h3 style="font-size:15px;font-weight:600;color:#0F0F0F;margin:0 0 1.1rem;">The 90-day window should…</h3>
+        <ul id="should-list" class="check-list"></ul>
+      </div>
+      <div>
+        <h3 style="font-size:15px;font-weight:600;color:#0F0F0F;margin:0 0 1.1rem;">It should not…</h3>
+        <ul id="should-not-list" class="check-list"></ul>
+      </div>
+    </div>
+
+    <!-- Execution layers -->
+    <h3 data-animate style="font-size:20px;font-weight:600;color:#0F0F0F;margin:0 0 1.5rem;">Four layers of the execution gap</h3>
+    <div id="layers-grid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:3rem;" class="layers-grid-resp"></div>
+
+    <!-- Rule of thumb -->
+    <div data-animate style="background:#0F0F0F;border-radius:6px;padding:2rem 2.5rem;max-width:48rem;">
+      <p style="font-size:11px;font-weight:600;color:#C8102E;text-transform:uppercase;letter-spacing:0.09em;margin:0 0 0.75rem;">Rule of thumb</p>
+      <p id="rule-of-thumb" style="font-size:19px;color:#fff;line-height:1.55;margin:0;"></p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     INTERACTIVE 1 — EXECUTION GAP DIAGNOSTIC (signature)
+═══════════════════════════════════════════════════════════════ -->
+<section id="diagnostic" style="background:#fff;padding:6rem 0;" aria-label="Interactive execution gap diagnostic">
+  <div class="max-w-7xl mx-auto px-6">
+
+    <p class="section-eyebrow">Interactive · Score your organisation</p>
+    <h2 data-animate style="font-size:clamp(28px,4vw,40px);font-weight:700;color:#0F0F0F;line-height:1.2;letter-spacing:-0.02em;max-width:40rem;margin:0 0 1rem;">
+      Where's your first constraint?
+    </h2>
+    <p data-animate style="font-size:16px;color:#4A4A48;line-height:1.7;margin:0 0 3rem;max-width:42rem;" id="diagnostic-intro"></p>
+
+    <div style="display:grid;grid-template-columns:1fr 340px;gap:3rem;align-items:start;" class="lg-two-col">
+      <div id="diagnostic-grid"></div>
+
+      <div style="position:sticky;top:120px;">
+        <div id="diagnostic-result" style="border-left:3px solid #C8102E;padding-left:1.5rem;">
+          <p style="font-size:11px;font-weight:500;color:#4A4A48;text-transform:uppercase;letter-spacing:0.08em;margin:0 0 0.75rem;">Your first constraint</p>
+          <p id="diag-result-dim" style="font-size:28px;font-weight:800;color:#C8102E;letter-spacing:-0.02em;margin:0 0 0.75rem;line-height:1.1;"></p>
+          <p id="diag-result-why" style="font-size:14.5px;color:#4A4A48;line-height:1.65;margin:0 0 1rem;"></p>
+          <p id="diag-result-decision" style="font-size:14px;font-weight:600;color:#0F0F0F;line-height:1.5;margin:0;"></p>
+        </div>
+        <div id="diagnostic-placeholder" style="border-left:3px solid #E8E8E4;padding-left:1.5rem;">
+          <p style="font-size:13px;color:#4A4A48;line-height:1.7;">Score all seven dimensions to see the constraint most likely to break your production path.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     SECTION 02 — DECIDE WHAT TO BUILD
+═══════════════════════════════════════════════════════════════ -->
+<section id="decide" style="background:#F8F8F6;padding:6rem 0;border-top:1px solid #E8E8E4;" aria-label="Section two — decide what to build">
+  <div class="max-w-7xl mx-auto px-6">
+
+    <p class="section-eyebrow">Section 02 · Decide what to build</p>
+    <h2 data-animate style="font-size:32px;font-weight:600;color:#0F0F0F;letter-spacing:-0.01em;margin:0 0 1rem;max-width:40rem;">
+      Start with the most executable valuable use case, not the most exciting one.
+    </h2>
+    <p data-animate style="font-size:16px;color:#4A4A48;line-height:1.7;margin:0 0 3rem;max-width:44rem;">
+      The first hard choice is which business workflow deserves a 90-day production path. A suitable first use case has visible value, a bounded scope, accessible evidence, manageable risk, and an owner who can change the workflow.
+    </p>
+
+    <!-- Use case pattern -->
+    <div data-animate style="background:#fff;border-left:3px solid #5B2D8E;padding:1.75rem 2rem;max-width:52rem;margin-bottom:4rem;">
+      <p style="font-size:11px;font-weight:600;color:#5B2D8E;text-transform:uppercase;letter-spacing:0.09em;margin:0 0 1rem;">Use this pattern</p>
+      <p id="pattern-template" style="font-size:17px;color:#0F0F0F;line-height:1.6;margin:0 0 1.25rem;font-style:italic;"></p>
+      <p style="font-size:11px;font-weight:600;color:#4A4A48;text-transform:uppercase;letter-spacing:0.08em;margin:0 0 0.5rem;">Example</p>
+      <p id="pattern-example" style="font-size:14.5px;color:#4A4A48;line-height:1.7;margin:0;"></p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     INTERACTIVE 2 — AI-READY SCORECARD (signature)
+═══════════════════════════════════════════════════════════════ -->
+<section id="scorecard" style="background:#fff;padding:6rem 0;" aria-label="Interactive AI-ready scorecard">
+  <div class="max-w-7xl mx-auto px-6">
+
+    <p class="section-eyebrow">Interactive · NashTech AI-ready scorecard</p>
+    <h2 data-animate style="font-size:clamp(28px,4vw,40px);font-weight:700;color:#0F0F0F;line-height:1.2;letter-spacing:-0.02em;max-width:40rem;margin:0 0 1rem;">
+      Should this use case move to 90-day planning?
+    </h2>
+    <p data-animate style="font-size:16px;color:#4A4A48;line-height:1.7;margin:0 0 3rem;max-width:42rem;" id="scorecard-intro"></p>
+
+    <div id="scorecard-grid" style="display:flex;flex-direction:column;"></div>
+
+    <div id="scorecard-result" style="display:none;margin-top:2rem;"></div>
+
+    <p id="scorecard-footnote" style="font-size:12px;color:#4A4A48;margin-top:2rem;max-width:44rem;"></p>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     SECTION 03 — DESIGN FOR PRODUCTION
+═══════════════════════════════════════════════════════════════ -->
+<section id="production" style="background:#F8F8F6;padding:6rem 0;border-top:1px solid #E8E8E4;" aria-label="Section three — design for production">
+  <div class="max-w-7xl mx-auto px-6">
+
+    <p class="section-eyebrow">Section 03 · Design for production</p>
+    <h2 data-animate style="font-size:32px;font-weight:600;color:#0F0F0F;letter-spacing:-0.01em;margin:0 0 1rem;max-width:40rem;">
+      Build the operating system around the AI, not only the AI itself.
+    </h2>
+    <p data-animate style="font-size:16px;color:#4A4A48;line-height:1.7;margin:0 0 3rem;max-width:44rem;">
+      Production readiness is created through a loop of decisions and evidence. Each stage should have a named owner and an artefact that proves the stage is complete — if either is missing, the work is not ready to move forward.
+    </p>
+
+    <!-- Success loop -->
+    <h3 style="font-size:20px;font-weight:600;color:#0F0F0F;margin:0 0 1.25rem;">The NashTech AI success loop</h3>
+    <div id="loop-flow" class="loop-flow" style="margin-bottom:1rem;"></div>
+    <p id="loop-discipline" style="font-size:14px;font-style:italic;color:#4A4A48;line-height:1.6;margin:0 0 4rem;max-width:44rem;"></p>
+
+    <!-- Operating model decisions -->
+    <h3 style="font-size:20px;font-weight:600;color:#0F0F0F;margin:0 0 1.25rem;">Operating model decisions that matter</h3>
+    <div id="operating-table" style="background:#fff;border:1px solid #E8E8E4;border-radius:6px;overflow:hidden;margin-bottom:4rem;"></div>
+
+    <!-- Human in the loop -->
+    <h3 style="font-size:20px;font-weight:600;color:#0F0F0F;margin:0 0 0.5rem;">Human-in-the-loop by design</h3>
+    <p id="hitl-intro" style="font-size:15px;color:#4A4A48;line-height:1.7;margin:0 0 2rem;max-width:44rem;"></p>
+    <div id="hitl-ladder" class="ladder" style="margin-bottom:4rem;"></div>
+
+    <!-- Governance checklist (interactive) -->
+    <div style="display:grid;grid-template-columns:1fr 320px;gap:3rem;align-items:start;" class="lg-two-col">
+      <div>
+        <h3 style="font-size:20px;font-weight:600;color:#0F0F0F;margin:0 0 0.5rem;">Governance design checklist</h3>
+        <p style="font-size:13px;color:#4A4A48;margin:0 0 1.5rem;">Check off each control as your team confirms it.</p>
+        <ul id="governance-list" style="list-style:none;margin:0;padding:0;"></ul>
+      </div>
+      <div style="border-left:1px solid #E8E8E4;padding-left:2.5rem;">
+        <p style="font-size:11px;font-weight:600;color:#4A4A48;text-transform:uppercase;letter-spacing:0.08em;margin:0 0 1rem;">Controls in place</p>
+        <div style="display:flex;align-items:baseline;gap:0.5rem;margin-bottom:0.75rem;">
+          <span id="gov-count" style="font-size:40px;font-weight:800;color:#0F0F0F;letter-spacing:-0.02em;">0</span>
+          <span style="font-size:18px;color:#4A4A48;">/ 7</span>
+        </div>
+        <div class="gov-progress-track"><div class="gov-progress-fill" id="gov-progress"></div></div>
+        <p id="gov-message" style="font-size:13px;color:#4A4A48;line-height:1.6;margin-top:1rem;"></p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     SECTION 04 — EXECUTE IN 90 DAYS (signature)
+═══════════════════════════════════════════════════════════════ -->
+<section id="execute" style="background:#fff;padding:6rem 0;" aria-label="Section four — execute in 90 days">
+  <div class="max-w-7xl mx-auto px-6">
+
+    <p class="section-eyebrow">Section 04 · The 90-day path</p>
+    <h2 data-animate style="font-size:clamp(28px,4vw,44px);font-weight:700;color:#0F0F0F;line-height:1.2;letter-spacing:-0.02em;max-width:48rem;margin:0 0 1.25rem;">
+      An evidence-based decision by day 90 — not a polished demo.
+    </h2>
+    <p id="ninety-intro" data-animate style="font-size:16px;color:#4A4A48;line-height:1.7;margin:0 0 0.75rem;max-width:46rem;"></p>
+    <p id="ninety-evidence" style="font-size:13px;color:#4A4A48;font-style:italic;line-height:1.6;margin:0 0 3.5rem;max-width:46rem;"></p>
+
+    <!-- Timeline -->
+    <div class="timeline-wrap" data-animate style="margin-bottom:1rem;" aria-label="90-day timeline: entry gate, weeks 1-3 plan, weeks 4-8 build, weeks 9-12 validate and decide">
+      <div class="timeline-track" id="timeline-track"></div>
+      <div class="timeline-labels" id="timeline-labels"></div>
+    </div>
+
+    <!-- Phase legend -->
+    <div id="phase-legend" style="display:flex;flex-wrap:wrap;gap:1.5rem;margin:1.5rem 0 4rem;"></div>
+
+    <!-- Phase detail cards -->
+    <div id="phase-cards" style="display:flex;flex-direction:column;gap:2rem;margin-bottom:4rem;"></div>
+
+    <!-- Day 90 decision -->
+    <h3 data-animate style="font-size:22px;font-weight:600;color:#0F0F0F;margin:0 0 0.5rem;">Day 90: what's the decision?</h3>
+    <p style="font-size:14px;color:#4A4A48;margin:0 0 1.5rem;max-width:40rem;">Pick the call your evidence supports — see what has to be true next.</p>
+    <div id="decision-cards" style="display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;" class="decision-grid-resp"></div>
+    <div id="decision-result" style="margin-top:1.5rem;padding:1.25rem 1.5rem;background:#F8F8F6;border-radius:6px;display:none;"></div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     SECTION 05 — MAKE IT WORK (AND SCALE)
+═══════════════════════════════════════════════════════════════ -->
+<section id="scale" style="background:#F8F8F6;padding:6rem 0;border-top:1px solid #E8E8E4;" aria-label="Section five — make it work and scale">
+  <div class="max-w-7xl mx-auto px-6">
+
+    <p class="section-eyebrow">Section 05 · Make it work (and scale)</p>
+    <h2 data-animate style="font-size:32px;font-weight:600;color:#0F0F0F;letter-spacing:-0.01em;margin:0 0 1.25rem;max-width:44rem;">
+      Reaching production is an achievement. Staying useful six months later is the real test.
+    </h2>
+    <p id="scaling-intro-text" data-animate style="font-size:16px;color:#4A4A48;line-height:1.7;margin:0 0 3rem;max-width:46rem;"></p>
+
+    <!-- Pull quote -->
+    <div data-animate style="border-left:2px solid #E8E8E4;padding-left:1.5rem;margin:0 0 4rem;max-width:44rem;">
+      <p style="font-size:22px;font-weight:700;color:#C8102E;line-height:0.8;margin-bottom:0.5rem;" aria-hidden="true">"</p>
+      <p id="leaders-lab-text" style="font-size:18px;font-style:italic;color:#0F0F0F;line-height:1.7;margin:0 0 0.75rem;"></p>
+      <p id="leaders-lab-attr" style="font-size:13px;color:#4A4A48;text-transform:uppercase;letter-spacing:0.08em;margin:0;"></p>
+    </div>
+
+    <!-- Interactive: scaling test -->
+    <div style="background:#fff;border:1px solid #E8E8E4;border-radius:6px;padding:2rem 2.25rem;max-width:56rem;">
+      <p style="font-size:11px;font-weight:600;color:#4A4A48;text-transform:uppercase;letter-spacing:0.09em;margin:0 0 1.25rem;">Interactive · The scaling test</p>
+      <div id="scaling-questions"></div>
+      <div id="scaling-verdict" style="margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid #E8E8E4;"></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     FINAL THOUGHT
+═══════════════════════════════════════════════════════════════ -->
+<section style="background:#fff;padding:6rem 0;border-top:1px solid #E8E8E4;" aria-label="Final thought">
+  <div class="max-w-7xl mx-auto px-6" style="max-width:46rem;">
+    <p class="section-eyebrow">Final thought</p>
+    <div id="final-thought"></div>
+    <p id="closing-question" data-animate style="font-size:19px;font-style:italic;color:#0F0F0F;line-height:1.6;margin:2rem 0;"></p>
+    <p id="closing-cta" style="font-size:16px;color:#4A4A48;line-height:1.7;"></p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     FOOTER
+═══════════════════════════════════════════════════════════════ -->
+<footer style="background:#fff;border-top:1px solid #E8E8E4;padding:3rem 0;" role="contentinfo">
+  <div class="max-w-7xl mx-auto px-6">
+    <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:2rem;margin-bottom:2rem;">
+
+      <div>
+        <div style="font-size:18px;font-weight:700;color:#0F0F0F;margin-bottom:0.25rem;">NashTech</div>
+        <p style="font-size:13px;color:#4A4A48;margin:0;">Closing the AI Execution Gap in 90 Days · An execution playbook, 2026</p>
+      </div>
+
+      <div style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap;">
+        <a href="https://www.nashtechglobal.com/contact/"
+           target="_blank" rel="noopener noreferrer"
+           style="display:inline-block;background:#C8102E;color:#fff;font-size:14px;font-weight:600;padding:0.75rem 1.5rem;border-radius:4px;text-decoration:none;transition:background 0.15s;"
+           onmouseover="this.style.background='#a00d24'" onmouseout="this.style.background='#C8102E'">
+          Talk to NashTech
+        </a>
+        <a href="index.html"
+           style="display:inline-block;color:#0F0F0F;font-size:14px;font-weight:600;padding:0.75rem 1.5rem;border-radius:4px;border:1px solid #E8E8E4;text-decoration:none;transition:border-color 0.15s;"
+           onmouseover="this.style.borderColor='#4A4A48'" onmouseout="this.style.borderColor='#E8E8E4'">
+          Read the CSD survey findings
+        </a>
+      </div>
+
+      <img src="src/ntlogo.png" alt="NashTech" style="height:108px;width:auto;" />
+
+    </div>
+    <p style="font-size:12px;color:#4A4A48;border-top:1px solid #E8E8E4;padding-top:1.5rem;margin:0;">
+      NashTech Playbook, Version 1, July 2026. Author: Ella Higham. Grounded in NashTech's State of Custom Software Development 2026 research and NashTech Leaders Lab sessions across Leeds, London and Birmingham.
+    </p>
+  </div>
+</footer>
+
+<!-- Responsive overrides -->
+<style>
+  @media (max-width: 1023px) {
+    .lg-two-col { grid-template-columns: 1fr !important; }
+    .lg-two-col > div:last-child { border-left: none !important; padding-left: 0 !important; padding-top: 2rem; border-top: 1px solid #E8E8E4; position: static !important; }
+    .lg-two-col-even { grid-template-columns: 1fr !important; gap: 2.5rem !important; }
+    .signals-grid-resp { grid-template-columns: 1fr !important; }
+    .layers-grid-resp { grid-template-columns: repeat(2,1fr) !important; }
+    .decision-grid-resp { grid-template-columns: repeat(2,1fr) !important; }
+  }
+  @media (max-width: 639px) {
+    .layers-grid-resp { grid-template-columns: 1fr !important; }
+    .decision-grid-resp { grid-template-columns: 1fr !important; }
+    #hero-grid { grid-template-columns: 1fr !important; }
+    #hero-grid > div:last-child { text-align: left !important; margin-top: 2.5rem; }
+    #hero-grid > div:last-child p { margin-left: 0 !important; }
+    .hero-rule { margin-left: 0 !important; }
+  }
+</style>
+
+<script type="module" src="src/playbook-main.js"></script>
+</body>
+</html>
